@@ -1,6 +1,6 @@
 // src/utils/Wordcount.ts
 // 计算文章的字数和阅读时间
-// 使用Astro-Pure的Markdown解析器
+// 使用来自Astro-Pure的Markdown脚本
 export interface ReadingTimeResults {
   minutes: number;
   words: number;
