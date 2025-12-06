@@ -1,0 +1,46 @@
+---
+import Header from '../components/Header.astro';
+import { getCollection } from 'astro:content';
+import PostList from '../components/Postlist.astro';
+import { readingTime } from '../utils/Wordcount';
+
+import './styles/golbal.css';
+import './styles/markdown.css'; // 替换为正确的路径
+// 在Astro组件的script或style标签中导入
+import 'animate.css';
+
+// 读取文章数据
+const posts = await getCollection('posts');
+
+// 计算每篇文章的字数
+const processedPosts = await Promise.all(
+  posts.map(async (post) => {
+    const readingTimeResults = await readingTime(post.body);
+    return {
+      ...post,
+      data: {
+        ...post.data,
+        wordCount: readingTimeResults.words, // 添加 wordCount 字段
+      },
+    };
+  })
+);
+
+// 按发布时间排序
+processedPosts.sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime());
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+  </head>
+
+  <body>
+    <Header />
+    <div class="article-container">
+      <PostList posts={processedPosts} />
+    </div>
+  </body>
+</html>

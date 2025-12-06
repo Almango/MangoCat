@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Header from '../../components/Header.astro';
+import '../styles/golbal.css';
+import '../styles/markdown.css';
+import 'animate.css';
+// 获取所有文章用于生成静态路径
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+// 接收文章数据
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{post.data.title} - MangoCat Blog</title>
+	</head>
+
+	<body>
+		<Header />
+
+
+		<div class="article-container " >
+			<article class="article-card ">
+				<header class="article-header">
+					<h1 class="article-title animate__flipInX animate__animated animate__delay-0.5s">{post.data.title}</h1>
+					<div class="article-meta animate__animated animate__fadeInUp animate__delay-0.1s">
+						<span>发布于：{new Date(post.data.published).toISOString().slice(0, 19).replace('T', ' ')}</span>
+						{post.data.category && <span>{post.data.category}</span>}
+						{post.data.tags.length > 0 && (
+							<span>{post.data.tags.join(', ')}</span>
+						)}
+					</div>
+				</header>
+				<div class="article-content">
+					<Content />
+				</div>
+			</article>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+---
+// PostList 组件，用于展示文章列表
+
+// 接收 posts 作为 props
+const { posts } = Astro.props;
+
+function formatWordCount(count: number): string {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + 'k';
+  }
+  return count.toString();
+}
+---
+
+{
+    posts.map((post: any) => (
+      <a href={`/posts/${post.slug}`} class="post-card animate__animated animate__fadeInUp">
+            <div class="post-content">
+                <div class="post-title">
+                    {/* 动态绑定标题 */}
+                    <h2>{post.data.title}</h2>
+                </div>
+                <div class="post-desc">
+                    {/* 动态绑定描述 */}
+                    <p>{post.data.description}</p>
+                </div>
+
+                <div class="post-info">
+                    {/* 动态绑定分类 */}
+                    <span class="category">{post.data.category}</span>
+                    {/* 动态绑定标签 */}
+                    {
+                        post.data.tags.map((tag, index) => (
+                            <span key={index} class="tag">{tag}</span>
+                        ))
+                    }
+                    <span class="word-count">
+                        {formatWordCount(post.data.wordCount)} 字{/* 动态绑定字数，并格式化 */}
+                    </span>
+                </div>
+                <div class="post-date">
+                    {/* 动态绑定发布日期并格式化 */}
+                    <p>{new Date(post.data.published).toISOString().substring(0, 10)}</p>
+                </div>
+            </div>
+        </a>
+    ))
+}

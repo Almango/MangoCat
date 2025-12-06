@@ -1,0 +1,421 @@
+
+/* 导入自定义字体 */
+@font-face {
+    font-family: 'Satoshi';
+    src: url('/src/assets/fonts/font-satoshi-500-norma.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 导入中文字体：阿里妈妈方圆体 */
+@font-face {
+    font-family: 'AlimamaFangYuanTi';
+    src: url('/src/assets/fonts/AlimamaFangYuanTi.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrainsMono';
+    src: url('/src/assets/fonts/JetBrainsMono-ExtraLight.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+/* 基础样式（保持不变）*/
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    letter-spacing: 1px; /* 增加字符间距 */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'AlimamaFangYuanTi', 'Satoshi', "InterVariable", "Noto Sans SC-Local", "Noto Sans SC", system-ui, sans-serif;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23fff' /%3E%3Crect x='50%' width='1' height='100%' fill='rgb(203 213 225)' /%3E%3Crect y='50%' width='100%' height='1' fill='rgb(203 213 225)' /%3E%3C/svg%3E%0A");
+    background-size: 20px;
+    background-attachment: fixed; /* 添加此行，让背景固定 */
+}
+
+.grid {
+
+}
+/* 通用容器样式（保持不变）*/
+.container {
+    width: 90%;
+    /* max-width: 800px; 将最大宽度移除*/
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* Header 样式 */
+.header {
+    background-color: #fff;
+    padding: 15px 20px;
+    margin: 0 auto; /* 重要：使用 auto 居中 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border-radius: px; */
+
+
+
+}
+
+.header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #007bff;
+}
+
+.theme-toggle {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: #eee;
+    color: #2c3e50;
+}
+
+/* PostList 样式（保持不变）*/
+.post-card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-card:hover {
+    background-color: #f5f5f5;
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-title {
+    margin-bottom: 0.5rem;
+}
+
+.post-title h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.post-desc p {
+    font-size: 15px;
+    color: #495057;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.post-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #777;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.post-info .tag,
+.post-info .category,
+.post-info .word-count {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    
+}
+
+.post-info .category {
+    color: #2980b9;
+    
+}
+
+.post-date {
+    width: 100%;
+}
+
+.post-date p {
+    font-size: 13px;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* 文章详情页样式 */
+
+.article-container {
+    max-width: 700px;    /*  和header保持一致 */
+    margin: 30px auto;   /* 使用 auto 使其居中 */
+    padding: 0;      /* 添加内边距，避免内容紧贴屏幕边缘 */
+    box-sizing: border-box;  /* 包含 padding 和 border */
+     
+}
+
+.header-container {
+    margin: 0 auto;   /* 使用 auto 使其居中 */
+    padding: 0;      /* 添加内边距，避免内容紧贴屏幕边缘 */
+    box-sizing: border-box;  /* 包含 padding 和 border */
+    /* padding: 0 10px; */
+}
+
+.article-card {
+    /* background-color: #fff;
+        border-radius: 8px; */
+    padding: 15px;
+}
+
+.article-header {
+    margin-bottom: 35px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 25px;
+}
+
+.article-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.article-meta span {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    white-space: nowrap;
+    padding: 5px 12px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.article-meta span:nth-child(2) {
+    color: #2ea085;
+    font-weight: 400;
+}
+
+.article-content {
+    line-height: 1.8;
+    color: #495057;
+    font-size: 16px;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+    color: #2c3e50;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+}
+
+.article-content h1 {
+    font-size: 2.5em;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.3em;
+}
+
+.article-content h2 {
+    font-size: 2em;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 0.2em;
+}
+
+.article-content h3 {
+    font-size: 1.75em;
+}
+
+.article-content h4 {
+    font-size: 1.5em;
+}
+
+.article-content h5 {
+    font-size: 1.25em;
+}
+
+.article-content h6 {
+    font-size: 1em;
+}
+
+.article-content p {
+    margin-bottom: 1.2em;
+}
+
+.article-content a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.article-content a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.article-content code {
+    background-color: #f8f9fa;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.article-content pre {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5em 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.article-content ul,
+.article-content ol {
+    margin-bottom: 1.2em;
+    padding-left: 1.5em;
+}
+
+/* 响应式设计（保持不变）*/
+@media (max-width: 768px) {
+        .container {
+        width: 95%;
+        padding: 0 10px;
+    }
+
+    .header {
+        padding: 12px 15px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-links li a {
+        font-size: 14px;
+    }
+
+    .theme-toggle {
+        font-size: 13px;
+        padding: 5px 8px;
+    }
+
+    .post-card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .post-title h2 {
+        font-size: 19px;
+    }
+
+    .post-desc p {
+        font-size: 14px;
+    }
+
+    .post-info {
+        font-size: 12px;
+    }
+
+    .article-container {
+        margin: 20px auto;
+        padding: 0 10px;  /* Reduced space on the sides*/
+    }
+
+    .article-card {
+        padding: 10px;
+    }
+
+    .article-title {
+        font-size: 1.8em;
+    }
+
+    .article-meta {
+        font-size: 13px;
+    }
+
+    .article-content {
+        font-size: 15px;
+    }
+}
+
+
+/* 自定义动画持续时间 */
+.animate__animated {
+  --animate-duration: 0.6s; /* 默认1秒 */
+  --animate-delay: 0s;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 确保fadeInUp动画速度一致 */
+.animate__animated.animate__fadeInUp {
+  --animate-duration: 0.5s;
+  --animate-delay: 0.1s;
+  /* 固定动画的初始位置，不受元素高度影响 */
+  transform-origin: top center;
+}
+
+/* 自定义迭代次数 */
+.animate__bounce {
+  --animate-iteration-count: infinite; /* 无限循环 */
+}

@@ -1,0 +1,258 @@
+/* Markdown 内容样式 */
+.article-content {
+    line-height: 1.8;
+    color: #333;
+    font-size: 16px;
+}
+
+/* 标题样式 */
+.article-content h1 {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 1.5em 0 0.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.article-content h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1.3em 0 0.7em;
+    padding-bottom: 0.2em;
+    border-bottom: 1px solid #e9ecef;
+    position: relative;
+    padding-left: 1.1em;
+}
+
+.article-content h2::before {
+    content: '#';
+    background-color: #3683f7;
+    border-radius: 5px;
+    padding: 0 2px;
+    position: absolute;
+    left: 0;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: inherit;
+}
+
+.article-content h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1.2em 0 0.6em;
+}
+
+.article-content h4 {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1.1em 0 0.5em;
+}
+
+.article-content h5 {
+    font-size: 1em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1em 0 0.4em;
+}
+
+.article-content h6 {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1em 0 0.4em;
+}
+
+/* 段落样式 */
+.article-content p {
+    margin: 0 0 1.2em 0;
+    text-align: justify;
+}
+
+/* 链接样式 */
+.article-content a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.article-content a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* 列表样式 */
+.article-content ul,
+.article-content ol {
+    margin: 0 0 1.2em 1.5em;
+    padding-left: 1.5em;
+    
+}
+
+.article-content ul {
+    list-style-type: disc;
+}
+
+.article-content ol {
+    list-style-type: decimal;
+    
+}
+
+.article-content ol li::marker {
+    color: hotpink; 
+    font-weight: 600;
+}
+
+.article-content li {
+    margin: 0.5em 0;
+    
+}
+
+/* 嵌套列表 */
+.article-content ul ul,
+.article-content ul ol,
+.article-content ol ul,
+.article-content ol ol {
+    margin: 0.5em 0 0.5em 1.5em;
+    
+}
+
+/* 代码样式 */
+.article-content code {
+    background-color: #fcfcfc;
+    color: #0070e0;
+    padding: 0.2em 0.5em;
+    font-weight: 600;
+    border-radius: 3px;
+        font-family: 'AlimamaFangYuanTi', "InterVariable", "Noto Sans SC-Local", "Noto Sans SC", system-ui, sans-serif;
+
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    font-size: 0.9em;
+}
+
+/* 代码块样式 */
+.article-content pre {
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 1em;
+    margin: 0 0 1.2em 0;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.article-content pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-family: 'SFMono-Regular', 'Consolas', 'Monaco', 'Courier New', monospace;
+    white-space: pre;
+}
+
+/* 引用样式 */
+.article-content blockquote {
+    margin: 0 0 1.2em 0;
+    padding: 0.5em 1em;
+    border-left: 4px solid #3498db;
+    background-color: #f8f9fa;
+    color: #555;
+    font-style: italic;
+}
+
+.article-content blockquote p {
+    margin: 0;
+}
+
+/* 表格样式 */
+.article-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 1.2em 0;
+}
+
+.article-content table th,
+.article-content table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.article-content table th {
+    background-color: #f2f2f2;
+    font-weight: 600;
+}
+
+/* 图片样式 */
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 1em 0;
+}
+
+/* 水平线样式 */
+.article-content hr {
+    border: 0;
+    height: 1px;
+    background-color: #e9ecef;
+    margin: 2em 0;
+}
+
+/* 粗体和斜体 */
+.article-content strong {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.article-content em {
+    font-style: italic;
+}
+
+/* 任务列表 */
+.article-content ul.task-list {
+    list-style-type: none;
+    padding-left: 1.5em;
+}
+
+.article-content ul.task-list li {
+    position: relative;
+}
+
+.article-content ul.task-list li input[type="checkbox"] {
+    position: absolute;
+    left: -1.5em;
+    top: 0.3em;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .article-content {
+        font-size: 15px;   
+    }
+    
+    .article-content h1 {
+        font-size: 1.4em;
+    }
+    
+    .article-content h2 {
+        font-size: 1.3em;
+    }
+    
+    .article-content h3 {
+        font-size: 1.2em;
+    }
+    
+    .article-content pre {
+        padding: 0.8em;
+        font-size: 0.85em;
+    }
+    
+    .article-content blockquote {
+        padding: 0.4em 0.8em;
+    }
+}
