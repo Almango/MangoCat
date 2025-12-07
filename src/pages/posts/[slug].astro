@@ -1,13 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
-import Header from '../../components/Header.astro';
+import Layout from '../../layouts/Layout.astro';
+
 import '../styles/golbal.css';
 import '../styles/markdown.css';
 import 'animate.css';
 // 获取所有文章用于生成静态路径
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
-  return posts.map((post) => ({
+  return posts.map((post) => ({ 
     params: { slug: post.slug },
     props: { post },
   }));
@@ -17,18 +18,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 ---
-
-<html lang="zh-CN">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{post.data.title} - MangoCat Blog</title>
-	</head>
-
-	<body>
-		<Header />
-
-
+<Layout pagetitle={`${post.data.title}`}>
 		<div class="article-container " >
 			<article class="article-card ">
 				<header class="article-header">
@@ -46,5 +36,4 @@ const { Content } = await post.render();
 				</div>
 			</article>
 		</div>
-	</body>
-</html>
+</Layout>

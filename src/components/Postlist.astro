@@ -30,7 +30,7 @@ function formatWordCount(count: number): string {
                     <span class="category">{post.data.category}</span>
                     {/* 动态绑定标签 */}
                     {
-                        post.data.tags.map((tag, index) => (
+                            post.data.tags.map((tag: string, index: number) => (
                             <span key={index} class="tag">{tag}</span>
                         ))
                     }

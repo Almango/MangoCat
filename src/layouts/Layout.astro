@@ -1,0 +1,69 @@
+---
+import { siteConfig } from '../config';
+import Header from '../components/Header.astro';
+const { title, favicon } = siteConfig;
+const { pagetitle, children } = Astro.props;
+// 使用页面传递的标题，如果没有则使用默认标题
+const pageTitle = title || pagetitle;
+
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <!-- 导入全局样式 -->
+    <link rel="stylesheet" href="/src/pages/styles/golbal.css" />
+
+    <!-- 主题初始化脚本，放置在head中以避免页面闪烁 -->
+    <script>
+    // 主题切换功能的内联实现
+    // 定义主题类型
+    const Theme = {
+        LIGHT: 'light',
+        DARK: 'dark',
+        SYSTEM: 'system'
+    };
+
+    // 获取主题设置
+    const getTheme = () => {
+        return localStorage.getItem('theme') || Theme.SYSTEM;
+    };
+
+    // 获取实际的主题值
+    const getActualTheme = () => {
+        const theme = getTheme();
+        if (theme === Theme.SYSTEM) {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT;
+        }
+        return theme;
+    };
+
+    // 更新文档的类名
+    const updateThemeClass = () => {
+        const actualTheme = getActualTheme();
+        const htmlElement = document.documentElement;
+        htmlElement.classList.remove(Theme.LIGHT, Theme.DARK);
+        htmlElement.classList.add(actualTheme);
+    };
+
+    // 立即初始化主题，避免页面闪烁
+    updateThemeClass();
+
+    // 监听系统主题变化
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', updateThemeClass);
+    </script>
+  </head>
+  <body>
+    <!-- 共享的Header组件 -->
+    <Header />
+    <!-- 页面内容 -->
+    <slot />
+    <script>
+    </script>
+  </body>
+</html>

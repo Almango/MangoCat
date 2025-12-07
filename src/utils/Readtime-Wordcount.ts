@@ -32,7 +32,7 @@ function isCJK(char: string): boolean {
 }
 
 
-export async function readingTime(markdown: string = '', wordsPerMinute: number = 200): Promise<ReadingTimeResults> {
+export async function ReadingTime(markdown: string = '', wordsPerMinute: number = 200): Promise<ReadingTimeResults> {
   let words = 0;
   let inWord = false;
 

@@ -1,6 +1,7 @@
 export const siteConfig = {
   title: 'Almango',
   author: 'MangoCat',
+  favicon: '/favicon.svg',
   desc: '天真永不消逝，浪漫至死不渝',
   siteUrl: 'https://blog.almango.cn',
 }
