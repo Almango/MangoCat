@@ -4,7 +4,9 @@ import Header from '../components/Header.astro';
 const { title, favicon } = siteConfig;
 const { pagetitle, children } = Astro.props;
 // 使用页面传递的标题，如果没有则使用默认标题
-const pageTitle = title || pagetitle;
+const pageTitle = pagetitle || title;
+
+
 
 ---
 
@@ -15,10 +17,6 @@ const pageTitle = title || pagetitle;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <link rel="icon" type="image/svg+xml" href={favicon} />
-    <!-- 导入全局样式 -->
-    <link rel="stylesheet" href="/src/pages/styles/golbal.css" />
-
-    <!-- 主题初始化脚本，放置在head中以避免页面闪烁 -->
     <script>
     // 主题切换功能的内联实现
     // 定义主题类型
@@ -61,9 +59,6 @@ const pageTitle = title || pagetitle;
   <body>
     <!-- 共享的Header组件 -->
     <Header />
-    <!-- 页面内容 -->
     <slot />
-    <script>
-    </script>
   </body>
 </html>

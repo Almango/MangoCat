@@ -71,7 +71,7 @@
     height: 1.3em; /* 设置与字体大小匹配的高度 */
     position: absolute;
     left: 0;
- 
+    top: 5px;
 }
 
 
@@ -181,6 +181,7 @@
     border-radius: 0;
     font-family: 'SFMono-Regular', 'Consolas', 'Monaco', 'Courier New', monospace;
     white-space: pre;
+    box-shadow: none;
 }
 
 /* 引用样式 */

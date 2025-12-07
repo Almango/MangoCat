@@ -36,7 +36,7 @@
         };
 
         // 设置主题
-        const setTheme = (theme) => {
+        const setTheme = (theme: string) => {
             localStorage.setItem('theme', theme);
             updateThemeClass();
         };
@@ -70,13 +70,13 @@
             const themeIcon = document.getElementById('theme-icon');
             switch (theme) {
                 case Theme.LIGHT:
-                    themeIcon.textContent = '☀️';
+                    if (themeIcon) themeIcon.textContent = '☀️';
                     break;
                 case Theme.DARK:
-                    themeIcon.textContent = '🌙';
+                    if (themeIcon) themeIcon.textContent = '🌙';
                     break;
                 case Theme.SYSTEM:
-                    themeIcon.textContent = '🖥️';
+                    if (themeIcon) themeIcon.textContent = '🖥️';
                     break;
             }
         };
@@ -88,7 +88,9 @@
             
             // 添加点击事件监听
             const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', toggleTheme);
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
         });
         </script>
     </header>
