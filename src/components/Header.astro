@@ -1,13 +1,13 @@
 <div class="header-container">
     <header class="header">
         <a href="/" class="logo"><h1>MangoCat</h1></a>
-        <nav>
+        <!-- <nav>
             <ul class="nav-links">
                 <li><a href="#">友链</a></li>
                 <li><a href="#">关于</a></li>
                 <li><a href="#">归档</a></li>
             </ul>
-        </nav>
+        </nav> -->
         <button class="theme-toggle" id="theme-toggle">
             <span id="theme-icon">☀️</span>
         </button>
@@ -62,6 +62,8 @@
             const htmlElement = document.documentElement;
             htmlElement.classList.remove(Theme.LIGHT, Theme.DARK);
             htmlElement.classList.add(actualTheme);
+            // 设置data-theme属性以支持astro-expressive-code
+            htmlElement.setAttribute('data-theme', actualTheme);
         };
 
         // 更新主题图标

@@ -11,6 +11,7 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "astro": "^5.16.4",
+    "astro-expressive-code": "^0.41.3",
     "mdast-util-to-string": "^4.0.0",
     "rehype-stringify": "^10.0.1",
     "remark-rehype": "^11.1.2"

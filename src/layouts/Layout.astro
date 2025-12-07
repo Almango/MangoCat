@@ -1,13 +1,11 @@
 ---
 import { siteConfig } from '../config';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 const { title, favicon } = siteConfig;
 const { pagetitle, children } = Astro.props;
 // 使用页面传递的标题，如果没有则使用默认标题
 const pageTitle = pagetitle || title;
-
-
-
 ---
 
 <!DOCTYPE html>
@@ -40,12 +38,14 @@ const pageTitle = pagetitle || title;
         return theme;
     };
 
-    // 更新文档的类名
+    // 更新文档的类名和data-theme属性
     const updateThemeClass = () => {
         const actualTheme = getActualTheme();
         const htmlElement = document.documentElement;
         htmlElement.classList.remove(Theme.LIGHT, Theme.DARK);
         htmlElement.classList.add(actualTheme);
+        // 设置data-theme属性以支持astro-expressive-code
+        htmlElement.setAttribute('data-theme', actualTheme);
     };
 
     // 立即初始化主题，避免页面闪烁
@@ -60,5 +60,7 @@ const pageTitle = pagetitle || title;
     <!-- 共享的Header组件 -->
     <Header />
     <slot />
+    <!-- 共享的Footer组件 -->
+    <Footer />
   </body>
 </html>

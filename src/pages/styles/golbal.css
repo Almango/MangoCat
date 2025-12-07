@@ -1,25 +1,41 @@
 /* 定义亮色主题的CSS变量 */
 :root {
+    --theme-color: #007bff;
     --bg-color: #f8f9fa;
     --text-color: #333;
     --card-bg: #fff;
+    --header-footer-bg-color: #fafbfc;
     --border-color: #e0e0e0;
     --hover-color: #eeeeee;
     --shadow-color: rgba(0, 0, 0, 0.05);
     --info-bg-color: #ececec;
     --info-font-color: #666666;
+    --code-bg-color: #f5f5f5;
+    --blockquote-bg-color: #f0f0f0;
+    --blockquote-text-color: #333333;
+    --blockquote-border-color: #c3cfd3;
+    --code-shadow-color: rgba(0, 0, 0, 0.02);
+    --code-border-shadow-color: rgba(27, 31, 35, 0.15);
 }
 
 /* 定义暗色主题的CSS变量 */
 :root.dark {
+    --theme-color: #007bff;
     --bg-color: hsl(223, 14%, 10%);
     --text-color: #ffffff;
     --card-bg: hsl(224, 14%, 16%);
+    --header-footer-bg-color: var(--bg-color);
     --border-color: #444;
     --hover-color: hsl(226, 13%, 19%);
     --shadow-color: rgba(44, 44, 44, 0.3);
-    --info-bg-color: #191d20;
+    --info-bg-color: #292933;
     --info-font-color: #777;
+    --code-bg-color: #1b1b1b;
+    --blockquote-bg-color: #292933;
+    --blockquote-text-color: #cccccc;
+    --blockquote-border-color: #555555;
+    --code-shadow-color: rgba(0, 0, 0, 0.2);
+    --code-border-shadow-color: rgba(255, 255, 255, 0.1);
 }
 
 /* 字体定义 */
@@ -47,7 +63,6 @@
     font-display: swap;
 }
 
-/* 基础样式 */
 html, body {
     padding: 0;
     margin: 0;
@@ -59,8 +74,14 @@ html, body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     background-size: 20px;
-    background-attachment: fixed;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: var(--bg-color);
+    background-image: linear-gradient(var(--border-color) 1px, transparent 1px),linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* 为页面内容添加顶部边距，避免被固定的 header 遮挡 */
+body {
+    padding-top: 70px;
 }
 
 /* 容器样式 */
@@ -72,13 +93,21 @@ html, body {
 
 /* Header 样式 */
 .header {
-    background-color: var(--card-bg);
+    background-color: var(--header-footer-bg-color);
     padding: 15px 20px;
     margin: 0 auto;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px var(--shadow-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .header h1 {
@@ -231,14 +260,14 @@ html, body {
 
 .article-header {
     margin-bottom: 35px;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 25px;
 }
 
 .article-title {
     font-size: 1.8em;
     font-weight: 700;
-    color: #2c3e50;
+    color: var(--title-color);
     margin: 0 0 20px 0;
     line-height: 1.2;
 }
@@ -252,7 +281,7 @@ html, body {
 }
 
 .article-meta span {
-    background-color: #f8f9fa;
+    background-color: var(--info-bg-color);
     border-radius: 12px;
     white-space: nowrap;
     padding: 5px 12px;
@@ -326,6 +355,24 @@ html, body {
     .article-meta {
         font-size: 13px;
     }
+}
+@keyframes fadeInUpCustom {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0); /* 自定义位移高度 */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* 强制元素使用自定义动画名（优先级最高） */
+.animate__animated.animate__fadeInUp {
+  animation-name: fadeInUpCustom !important; /* 覆盖默认fadeInUp */
+  --animate-duration: 0.5s;
+  --animate-delay: 0.1s;
+  transform-origin: top center;
 }
 
 /* 动画持续时间 */

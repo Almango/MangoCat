@@ -1,7 +1,7 @@
 /* Markdown 内容样式 */
 .article-content {
     line-height: 1.8;
-    color: #333;
+    color: var(--text-color);
     font-size: 16px;
     font-weight: 500;
     margin: 20px 0;
@@ -11,7 +11,7 @@
 .article-content h1 {
     font-size: 1.6em;
     font-weight: 700;
-    color: #2c3e50;
+    color: var(--title-color);
     margin: 1.5em 0 0.8em;
     padding-bottom: 0.3em;
     border-bottom: 2px solid transparent;
@@ -34,7 +34,7 @@
 .article-content h2 {
     font-size: 1.5em;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--title-color);
     margin: 1.3em 0 0.7em;
     padding-bottom: 0.2em;
     border-bottom: 1px solid transparent;
@@ -57,7 +57,7 @@
 .article-content h3 {
     font-size: 1.3em;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--title-color);
     margin: 1.2em 0 0.6em;
     position: relative;
     padding-left: 0.5em; /* 保持一致 */
@@ -78,21 +78,21 @@
 .article-content h4 {
     font-size: 1.2em;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--title-color);
     margin: 1.1em 0 0.5em;
 }
 
 .article-content h5 {
     font-size: 1em;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--title-color);
     margin: 1em 0 0.4em;
 }
 
 .article-content h6 {
     font-size: 0.8em;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--title-color);
     margin: 1em 0 0.4em;
 }
 
@@ -151,21 +151,21 @@
 }
 
 /* 代码样式 */
+
 .article-content code {
-    background-color: #f5f5f5;
-    color: #000000;
+    background-color: var(--code-bg-color);
+    color: var(--text-color);
     padding: 0.2em 0.5em;
     border-radius: 3px;
-        font-family: 'AlimamaFangYuanTi', "InterVariable", "Noto Sans SC-Local", "Noto Sans SC", system-ui, sans-serif;
-
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;
+    font-family: 'AlimamaFangYuanTi', "InterVariable", "Noto Sans SC-Local", "Noto Sans SC", system-ui, sans-serif;
     font-size: 0.9em;
+    box-shadow: var(--code-shadow-color) 0px 1px 3px 0px, var(--code-border-shadow-color) 0px 0px 0px 1px;
 }
 
 /* 代码块样式 */
 .article-content pre {
-    background-color: #f6f8fa;
-    border: 1px solid #e1e4e8;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 1em;
     margin: 0 0 1.2em 0;
@@ -188,10 +188,11 @@
 .article-content blockquote {
     margin: 0 0 1.2em 0;
     padding: 0.5em 1em;
-    border-left: 4px solid #c3cfd3;
-    background-color: #f0f0f0;
-    color: #333333;
+    border-left: 4px solid var(--blockquote-border-color);
+    background-color: var(--blockquote-bg-color);
+    color: var(--blockquote-text-color);
     font-size: 15px;
+    margin-top: 20px;
 }
 
 .article-content blockquote p {
@@ -257,6 +258,16 @@
     position: absolute;
     left: -1.5em;
     top: 0.3em;
+}
+
+/* 禁用 expressive-code pre 的边框 */
+/* 禁用 expressive-code frame 的边框 */
+.expressive-code pre {
+    border: none !important;
+}
+.expressive-code .frame {
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px !important;
+    
 }
 
 /* 响应式设计 */
