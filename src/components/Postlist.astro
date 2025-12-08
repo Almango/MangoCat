@@ -1,6 +1,11 @@
 ---
 // PostList 组件，用于展示文章列表
 
+// 导入配置、图标组件和类型
+import { SiteConfig } from '../config';
+import { Icon } from "astro-icon/components";
+import type { Post } from '../utils/types';
+
 // 接收 posts 作为 props
 const { posts } = Astro.props;
 
@@ -10,10 +15,32 @@ function formatWordCount(count: number): string {
     }
     return count.toString();
 }
----
 
+
+// 获取分类配置（图标和颜色）
+function getCategoryConfig(category: string): { icon: string; color: string } {
+    // 默认可配置
+    const defaultConfig = {
+        icon: 'material-symbols:category-rounded',
+        color: '#2980b9'
+    };
+    // 如果分类存在则合并配置，否则返回默认配置
+    return category && SiteConfig.Categories[category] 
+        ? { ...defaultConfig, ...SiteConfig.Categories[category] }
+        : defaultConfig;
+}
+// 定义扩展的文章接口，包含分类配置
+interface PostWithCategoryConfig extends Post {
+    categoryConfig: { icon: string; color: string };
+}
+// 预处理文章数据，添加分类配置
+const processedPosts = posts.map((post: Post) => ({
+    ...post,
+    categoryConfig: getCategoryConfig(post.data.category)
+})) as PostWithCategoryConfig[];
+---
 {
-    posts.map((post: any) => (
+    processedPosts.map((post: PostWithCategoryConfig) => (
         <a href={`/posts/${post.slug}`}class="post-card animate__animated animate__fadeInUp animate__delay-100ms">
             <div class="post-content">
                 <div class="post-title">
@@ -23,7 +50,12 @@ function formatWordCount(count: number): string {
                     <p>{post.data.description}</p>
                 </div>
                 <div class="post-info">
-                    <span class="category">{post.data.category}</span>
+                    {post.data.category && (
+                        <span class="category" style={{ color: post.categoryConfig.color }}>
+                            <Icon name={post.categoryConfig.icon} />
+                            {post.data.category}
+                        </span>
+                    )}
                     {post.data.tags.map((tag: string, index: number) => (
                         <span class="tag">{tag}</span>
                     ))}

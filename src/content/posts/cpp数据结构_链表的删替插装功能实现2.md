@@ -36,7 +36,7 @@ slug: "97461e86"
 4 . 这里存在一个`新的可能性`：就是当链表不存在要找的节点参照物。这种情况都是在循环到达最后一个节点的时候发生的，我们只需要写个判断if(FindOut->Pointer_Next == nullptr)，意思是访问最后一个节点的指针域是否为nullptr，是则输出“不存在目标”。
 
 5 . 由于while的条件是`FindOut->Person_Name != oidName`，当循环结束只会有两种结果，一种是已经匹配到目标，一种是找不到目标，所以可以直接在while外面给当前的指针空间赋值。
-```c++
+```cpp
 void ReplaceLinkNode(string oidName, int newAge, string newName)
 {
     // LinkNodeBaseStruct * NewLinkNode = CreatLinkNode(newAge,newName);
@@ -157,7 +157,7 @@ void DeleteLinkNode(string target_name)
 
 > 下面是整个单链表及其已实现的基本功能
 
-```C++
+```cpp
 #include <iostream>
 #include <string.h>
 

@@ -45,7 +45,7 @@
 .article-content h2::before {
     content: '#';
     background-color: #3683f7;
-    border-radius: 5px;
+    border-radius: 6px;
     padding: 0 2px;
     position: absolute;
     left: 0;
@@ -66,7 +66,7 @@
 .article-content h3::before {
     content: ''; /* 移除空格内容，使用固定宽度 */
     background-color: #3683f7;
-    border-radius: 12px;
+    border-radius: 6px;
     width: 4px; /* 设置固定宽度，控制元素宽度 */
     height: 1.3em; /* 设置与字体大小匹配的高度 */
     position: absolute;
@@ -159,6 +159,7 @@
     border-radius: 3px;
     font-family: 'AlimamaFangYuanTi', "InterVariable", "Noto Sans SC-Local", "Noto Sans SC", system-ui, sans-serif;
     font-size: 0.9em;
+    font-weight: bold;
     box-shadow: var(--code-shadow-color) 0px 1px 3px 0px, var(--code-border-shadow-color) 0px 0px 0px 1px;
 }
 
@@ -188,11 +189,12 @@
 .article-content blockquote {
     margin: 0 0 1.2em 0;
     padding: 0.5em 1em;
-    border-left: 4px solid var(--blockquote-border-color);
+    border-left: 4px solid var(--theme-color);
     background-color: var(--blockquote-bg-color);
     color: var(--blockquote-text-color);
     font-size: 15px;
     margin-top: 20px;
+    border-radius: 6px;
 }
 
 .article-content blockquote p {
@@ -204,18 +206,28 @@
     border-collapse: collapse;
     width: 100%;
     margin: 0 0 1.2em 0;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .article-content table th,
 .article-content table td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 8px;
     text-align: left;
 }
 
 .article-content table th {
-    background-color: #f2f2f2;
+    background-color: var(--info-bg-color);
     font-weight: 600;
+    color: var(--info-font-color);
+}
+
+/* 表格行悬停效果 */
+.article-content table tr:hover {
+    background-color: var(--hover-color);
 }
 
 /* 图片样式 */
@@ -236,12 +248,14 @@
 
 /* 粗体和斜体 */
 .article-content strong {
-    font-weight: 600;
-    color: #2c3e50;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 .article-content em {
     font-style: italic;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 /* 任务列表 */

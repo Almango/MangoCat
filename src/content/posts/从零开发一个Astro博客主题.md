@@ -36,7 +36,7 @@ Layouts 目录的常见用法：
 
 1. 创建一个Layout.astro组件
 
-```astro
+```js title="components/Layout.astro"
 ---
 import { siteConfig } from '../config';
 const { title, favicon } = siteConfig;
@@ -130,3 +130,38 @@ import './styles/markdown.css';
 import 'animate.css';
 
 ```
+
+## 代码块配色与功能
+
+
+
+## 主题切换功能
+
+> Astro插件：astro-theme-toggle
+>轻松为你的 Astro 项目添加一个涟漪风格的主题切换动画。
+
+1. 这是 Astro 生态中专门用于主题切换的轻量插件，它能够轻松为你的 Astro 项目添加一个涟漪风格的主题切换动画。基于 Web API（matchMedia + localStorage）实现，支持自动检测系统主题、持久化存储用户选择，且集成简单。
+
+2. 安装插件
+```bash
+npm install astro-theme-toggle
+```
+
+3. 引入插件只需将导入ThemeScript和Toggle组件，并插入到Layout布局组件中即可使用。
+```js title="components/Layout.astro"
+---
+---
+import { ThemeScript } from "astro-theme-toggle/components";
+import { Toggle } from "astro-theme-toggle/components";
+---
+
+<div class="header-container">
+    <header class="header">
+        <a href="/" class="logo"><h1>MangoCat</h1></a>
+        <ThemeScript />
+        <Toggle class="theme-toggle" style={{ width: "18px", height: "18px" }} />
+    </header>
+</div>
+```
+4. 该插件甚至不用配置图标，自带两个明暗图标，另外它缺少一个跟随系统主题的功能，不过这也不是问题，因为系统主题切换时，会自动触发主题切换动画。
+

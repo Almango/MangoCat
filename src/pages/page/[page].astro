@@ -1,0 +1,96 @@
+---
+import Header from '../../components/Header.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import PostList from '../../components/Postlist.astro';
+import { ReadingTime } from '../../utils/Readtime-Wordcount';
+import { Icon } from "astro-icon/components";
+import { SiteConfig } from '../../config';
+
+import '../styles/golbal.css';
+import '../styles/markdown.css'; 
+import 'animate.css';
+
+// 分页配置
+const POSTS_PER_PAGE = SiteConfig.PaginationConfig.POSTS_PER_PAGE;
+
+// 生成静态路径
+export async function getStaticPaths() {
+  // 在函数内部重新定义分页配置
+  const POSTS_PER_PAGE = SiteConfig.PaginationConfig.POSTS_PER_PAGE;
+  
+  // 在函数内部获取文章数据
+  const posts = await getCollection('posts');
+  
+  // 计算总页数
+  const totalPosts = posts.length;
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  
+  const paths = [];
+  
+  // 为每一页生成一个路径
+  for (let i = 2; i <= totalPages; i++) {
+    paths.push({
+      params: { page: i.toString() },
+    });
+  }
+  
+  return paths;
+}
+
+// 获取当前页码
+const page = Number(Astro.params.page) || 2;
+// 重新获取文章数据用于页面渲染
+const posts = await getCollection('posts');
+
+// 计算总页数用于分页导航
+const totalPosts = posts.length;
+const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
+// 计算每篇文章的字数
+const processedPosts = await Promise.all(
+  posts.map(async (post) => {
+    const readingTimeResults = await ReadingTime(post.body);
+    return {
+      ...post,
+      data: {
+        ...post.data,
+        wordCount: readingTimeResults.words, // 添加 wordCount 字段
+      },
+    };
+  })
+);
+
+// 按发布时间排序
+processedPosts.sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime());
+
+// 分页处理
+const startIndex = (page - 1) * POSTS_PER_PAGE;
+const paginatedPosts = processedPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+---
+<Layout>
+    <div class="article-container">
+      <PostList posts={paginatedPosts} />
+    </div>
+    
+    <!-- 分页导航 -->
+    <div class="pagination">
+      <span class="pagination-info">
+         {page}  /  {totalPages}
+      </span>
+      
+      <div class="pagination-buttons">
+        {page > 1 && (
+          <a href={page === 2 ? '/' : `/page/${page - 1}`} class="pagination-btn prev">
+            <Icon name="material-symbols:chevron-left-rounded" />
+          </a>
+        )}
+        
+        {page < totalPages && (
+          <a href={`/page/${page + 1}`} class="pagination-btn next">
+            <Icon name="material-symbols:chevron-right-rounded" />
+          </a>
+        )}
+      </div>
+    </div>
+</Layout>

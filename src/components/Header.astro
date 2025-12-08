@@ -1,3 +1,9 @@
+---
+import { Icon } from "astro-icon/components";
+import { ThemeScript } from "astro-theme-toggle/components";
+import { Toggle } from "astro-theme-toggle/components";
+---
+
 <div class="header-container">
     <header class="header">
         <a href="/" class="logo"><h1>MangoCat</h1></a>
@@ -8,92 +14,7 @@
                 <li><a href="#">归档</a></li>
             </ul>
         </nav> -->
-        <button class="theme-toggle" id="theme-toggle">
-            <span id="theme-icon">☀️</span>
-        </button>
-
-        <script>
-        // 主题切换功能的内联实现
-        // 定义主题类型
-        const Theme = {
-            LIGHT: 'light',
-            DARK: 'dark',
-            SYSTEM: 'system'
-        };
-
-        // 获取主题设置
-        const getTheme = () => {
-            return localStorage.getItem('theme') || Theme.SYSTEM;
-        };
-
-        // 获取实际的主题值
-        const getActualTheme = () => {
-            const theme = getTheme();
-            if (theme === Theme.SYSTEM) {
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT;
-            }
-            return theme;
-        };
-
-        // 设置主题
-        const setTheme = (theme: string) => {
-            localStorage.setItem('theme', theme);
-            updateThemeClass();
-        };
-
-        // 切换主题
-        const toggleTheme = () => {
-            const currentTheme = getTheme();
-            let newTheme;
-            if (currentTheme === Theme.LIGHT) {
-                newTheme = Theme.DARK;
-            } else if (currentTheme === Theme.DARK) {
-                newTheme = Theme.SYSTEM;
-            } else {
-                newTheme = Theme.LIGHT;
-            }
-            setTheme(newTheme);
-            updateThemeIcon();
-        };
-
-        // 更新文档的类名
-        const updateThemeClass = () => {
-            const actualTheme = getActualTheme();
-            const htmlElement = document.documentElement;
-            htmlElement.classList.remove(Theme.LIGHT, Theme.DARK);
-            htmlElement.classList.add(actualTheme);
-            // 设置data-theme属性以支持astro-expressive-code
-            htmlElement.setAttribute('data-theme', actualTheme);
-        };
-
-        // 更新主题图标
-        const updateThemeIcon = () => {
-            const theme = getTheme();
-            const themeIcon = document.getElementById('theme-icon');
-            switch (theme) {
-                case Theme.LIGHT:
-                    if (themeIcon) themeIcon.textContent = '☀️';
-                    break;
-                case Theme.DARK:
-                    if (themeIcon) themeIcon.textContent = '🌙';
-                    break;
-                case Theme.SYSTEM:
-                    if (themeIcon) themeIcon.textContent = '🖥️';
-                    break;
-            }
-        };
-
-        // 初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            // 初始更新图标
-            updateThemeIcon();
-            
-            // 添加点击事件监听
-            const themeToggle = document.getElementById('theme-toggle');
-                if (themeToggle) {
-                    themeToggle.addEventListener('click', toggleTheme);
-                }
-        });
-        </script>
+        <ThemeScript />
+        <Toggle class="theme-toggle" style={{ width: "18px", height: "18px" }} />
     </header>
 </div>
