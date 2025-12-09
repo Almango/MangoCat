@@ -90,6 +90,16 @@ body {
     padding-top: 70px;
 }
 
+/* 通用容器样式 */
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+}
 
 
 /* Header 样式 */
@@ -346,17 +356,7 @@ body {
     box-sizing: border-box;
 }
 
-/* 通用容器样式 */
 
-
-
-.container {
-    width: 90%;
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 .header-container {
     margin: 0 auto;
@@ -503,7 +503,7 @@ body {
     height: 60px;
     border-radius: 12px;
     overflow: hidden;
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--shadow-color);
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -544,21 +544,17 @@ body {
     white-space: nowrap;
 }
 
-/* 页脚容器样式 */
-.container.footer-container {
-    margin: 0 auto;
-    padding: 0;
-}
 
 /* 响应式设计 */
 @media (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 100%;
+        padding: 0 15px;
         
     }
 
     .header {
-        padding: 12px 20px;
+        padding: 12px 15px;
     }
 
     .header h1 {

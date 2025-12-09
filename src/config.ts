@@ -33,5 +33,5 @@ export const ProfileConfig = {
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.5.3',
+  THEME_VERSION: '0.5.8',
 }

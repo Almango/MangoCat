@@ -17,6 +17,10 @@ export interface SiteConfigType {
   Categories: {
     [key: string]: CategoryConfig;
   };
+  NavConfig: {
+    name: string;
+    path: string;
+  }[];
 }
 
 // 定义文章数据接口

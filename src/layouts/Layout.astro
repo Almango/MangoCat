@@ -21,12 +21,15 @@ const pageTitle = pagetitle || title;
     <link rel="icon" type="image/svg+xml" href={favicon} />
   </head>
   <body>
+
+    
     <Header />
     <div class="container">
+      <br>
       <slot />
-    </div>
-    <div class="container footer-container">
       <Footer />
+    </div>
+
     </div>
   </body>
 </html>
