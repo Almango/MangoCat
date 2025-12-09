@@ -258,6 +258,18 @@
     color: var(--text-color);
 }
 
+/* 文章内容中的图标样式 */
+.article-content svg {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-shrink: 0;
+    margin-bottom: 1px; /* 微调对齐 */
+}
+
 /* 任务列表 */
 .article-content ul.task-list {
     list-style-type: none;
@@ -282,6 +294,14 @@
 .expressive-code .frame {
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px !important;
     
+}
+
+/* 自定义 expressive-code 行内代码样式 */
+.expressive-code .ec-line .code {
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
 /* 响应式设计 */

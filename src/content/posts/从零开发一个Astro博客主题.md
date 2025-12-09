@@ -32,14 +32,23 @@ Layouts 目录的常见用法：
 嵌套布局： 你可以将布局组件嵌套在一起，构建更复杂的页面结构。
 简单示例：
 
-### 在Src内创建一个layouts目录
+### 共享html格式
 
 1. 创建一个Layout.astro组件
 
-```js title="components/Layout.astro"
+```astro title="components/Layout.astro"
 ---
-import { siteConfig } from '../config';
-const { title, favicon } = siteConfig;
+import { SiteConfig} from '../config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const { title, favicon } = SiteConfig;
+const { pagetitle, children } = Astro.props;
+
+import '../styles/golbal.css';
+import '../styles/markdown.css'; 
+import 'animate.css';
+
+const pageTitle = pagetitle || title;
 ---
 
 <!DOCTYPE html>
@@ -47,15 +56,15 @@ const { title, favicon } = siteConfig;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <link rel="icon" type="image/svg+xml" href={favicon} />
   </head>
   <body>
-    <!-- 将组件显示在共享模板内 -->
-               <slot /> 
-    <!-- 将组件显示在共享模板内 -->
-    <script>
-    </script>
+    <!-- 共享的Header组件 -->
+    <Header />
+    <slot />
+    <!-- 共享的Footer组件 -->
+    <Footer />
   </body>
 </html>
 ```
@@ -79,7 +88,41 @@ import Layout from '../layouts/Layout.astro';
 ```
 6. 这样，导航栏和文章列表就会被渲染到Layout布局组件中在，这就相当于它们都共享了Layout布局组件的结构。
 
+### 共享布局
 
+#### 新建一个components/Container.astro组件
+
+1. 这将作为一个统一布局，所有页面都将使用这个布局。
+
+```astro title="components/Container.astro"
+---
+// Container组件，用于统一包装页面内容
+---
+<div class="container">
+    <slot />
+</div>
+```
+
+2. 例如：在`src/pages/index.astro`中引入布局组件，导航栏和文章列表都将被渲染到Container组件中，这样就实现了布局的共享以达到布局样式的统一。
+3. 不仅如此这也降低了代码的重复度，提高了代码的可维护性。
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+...
+---
+<Layout>
+    <Container>
+        <Header />
+        <div class="article-container">
+          <PostList posts={processedPosts} />
+        </div>
+    </Container>
+</Layout>
+```
+
+2. 
 ## 字数统计
 
 1. 代码来源于`Astro-Pure`主题

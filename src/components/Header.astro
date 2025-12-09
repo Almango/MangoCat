@@ -2,19 +2,41 @@
 import { Icon } from "astro-icon/components";
 import { ThemeScript } from "astro-theme-toggle/components";
 import { Toggle } from "astro-theme-toggle/components";
+import { SiteConfig } from "../config.ts";
+const { NavConfig } = SiteConfig;
 ---
 
-<div class="header-container">
-    <header class="header">
-        <a href="/" class="logo"><h1>MangoCat</h1></a>
-        <!-- <nav>
-            <ul class="nav-links">
-                <li><a href="#">友链</a></li>
-                <li><a href="#">关于</a></li>
-                <li><a href="#">归档</a></li>
-            </ul>
-        </nav> -->
+<header class="header">
+    <a href="/" class="logo"><h1>MangoCat</h1></a>
+    
+    <nav class="nav-container">
+        <ul class="nav-links">
+            {NavConfig.map((navItem) => (
+                <li key={navItem.path}>
+                    <a href={navItem.path}>{navItem.name}</a>
+                </li>
+            ))}
+        </ul>
+    </nav>
+    
+    <!-- 右侧按钮组：主题切换和导航折叠 -->
+    <div class="header-buttons">
         <ThemeScript />
         <Toggle class="theme-toggle" style={{ width: "18px", height: "18px" }} />
-    </header>
-</div>
+        
+        <!-- 移动端导航折叠按钮 -->
+        <button class="nav-toggle" aria-label="打开导航">
+            <Icon name="material-symbols:menu-rounded" />
+        </button>
+    </div>
+    
+    <script>
+        // 移动端导航切换逻辑
+        const navToggle = document.querySelector('.nav-toggle');
+        const navContainer = document.querySelector('.nav-container');
+        
+        navToggle?.addEventListener('click', () => {
+            navContainer?.classList.toggle('nav-open');
+        });
+    </script>
+</header>

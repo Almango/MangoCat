@@ -160,7 +160,7 @@ export const profileConfig = {
 
 ### 修改样式
 
-网站样式文件位于 `src/pages/styles/` 目录下：
+网站样式文件位于 `src/styles/` 目录下：
 
 - `global.css`: 全局样式
 - `markdown.css`: Markdown内容样式

@@ -1,6 +1,7 @@
+@import "tailwindcss";
 /* 定义亮色主题的CSS变量 */
 :root {
-    --theme-color: #db86d4;
+    --theme-color: #1b6cd6ff;
     --bg-color: #f8f9fa;
     --title-color: #151515;
     --text-color: #454545;
@@ -18,21 +19,19 @@
     --blockquote-border-color: #c3cfd3;
     --code-shadow-color: rgba(0, 0, 0, 0.02);
     --code-border-shadow-color: rgba(27, 31, 35, 0.15);
-
     --box-synchronism-padding: 0 20px;
 }
 
 /* 定义暗色主题的CSS变量 */
 :root.dark {
-    --theme-color: #007bff;
     --bg-color: hsl(223, 14%, 10%);
     --title-color: #d9d9d9;
     --text-color: #c9c9c9;
-    --card-bg: hsl(224, 14%, 16%);
+    --card-bg: hsl(225, 13%, 12%);
     --header-footer-bg-color: var(--bg-color);
     --border-color: #444;
     --grid-line-color: hsl(223, 10%, 13%); /* 专门用于背景网格的颜色 */
-    --hover-color: hsl(228, 15%, 20%);
+    --hover-color: hsl(228, 13%, 15%);
     --shadow-color: rgba(44, 44, 44, 0.3);
     --info-bg-color: #292933;
     --info-font-color: #777;
@@ -91,12 +90,7 @@ body {
     padding-top: 70px;
 }
 
-/* 容器样式 */
-.container {
-    width: 90%;
-    margin: 20px auto;
-    padding: 0 15px;
-}
+
 
 /* Header 样式 */
 .header {
@@ -124,6 +118,15 @@ body {
     margin: 0;
 }
 
+/* 导航容器 */
+.nav-container {
+    margin-left: auto;
+    margin-right: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .nav-links {
     display: flex;
     gap: 20px;
@@ -134,9 +137,85 @@ body {
 
 .nav-links li a {
     text-decoration: none;
-    color: #555;
+    color: var(--text-color);
     font-size: 15px;
     transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: var(--theme-color);
+}
+
+/* 移动端导航切换按钮 */
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    box-shadow: var(--shadow-color) 0px 1px 3px 0px, var(--shadow-color) 0px 0px 0px 1px;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 6px;
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+}
+.nav-toggle:hover {
+    background-color: var(--hover-color);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .nav-container {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background-color: var(--header-footer-bg-color);
+        box-shadow: 0 3px 5px var(--shadow-color);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        margin-right: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    .nav-container.nav-open {
+        max-height: 200px;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .nav-links li {
+        width: 100%;
+    }
+    
+    .nav-links li a {
+        font-size: 16px;
+        width: 100%;
+        display: block;
+        padding: 5px 0;
+    }
 }
 
 .nav-links li a:hover {
@@ -187,6 +266,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    
 }
 
 .post-title {
@@ -231,10 +311,19 @@ body {
     gap: 5px;
     white-space: nowrap;
     border: 2px solid  var(--card-bg);
+
 }
 
-.post-info .category {
-    color: #2980b9;
+/* 全局图标样式，确保与文字对齐 */
+.post-info .category svg{
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-shrink: 0;
+    margin-bottom: 1px; /* 微调对齐 */
 }
 
 
@@ -257,6 +346,18 @@ body {
     box-sizing: border-box;
 }
 
+/* 通用容器样式 */
+
+
+
+.container {
+    width: 90%;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .header-container {
     margin: 0 auto;
     padding: 0;
@@ -269,7 +370,7 @@ body {
 
 .article-header {
     margin-bottom: 35px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px dashed var(--border-color);
     padding-bottom: 25px;
 }
 
@@ -295,6 +396,20 @@ body {
     white-space: nowrap;
     padding: 5px 12px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.article-meta span svg {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-shrink: 0;
+    margin-bottom: 1px;
 }
 
 .article-meta span:nth-child(2) {
@@ -372,11 +487,74 @@ body {
     box-sizing: border-box;
 }
 
+/* 主页头像和作者信息样式 */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.profile-section:hover .profile-avatar {
+    transform: scale(1.05);
+    border-color: var(--theme-color);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-author {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin: 0 0 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 页脚容器样式 */
+.container.footer-container {
+    margin: 0 auto;
+    padding: 0;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .container {
-        width: 95%;
-        padding: 0 10px;
+        width: 90%;
+        
     }
 
     .header {
@@ -420,6 +598,10 @@ body {
         margin: 20px auto;
         padding: 0 20px;
     }
+    
+    .container {
+        margin: 20px auto;
+    }
 
     .article-card {
         padding: 0px;
@@ -431,9 +613,6 @@ body {
 
     .article-meta {
         font-size: 13px;
-    }
-    .pagination {
-        padding: var(--box-synchronism-padding);
     }
 }
 @keyframes fadeInUpCustom {

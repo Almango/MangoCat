@@ -4,11 +4,14 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import remarkBreaks from 'remark-breaks';
 import icon from 'astro-icon';
 
+import tailwindcss from '@tailwindcss/vite';
+
 export default defineConfig({
   markdown: {
     remarkPlugins: [remarkBreaks],
     gfm: true,
   },
+
   integrations: [
     expressiveCode({
       themes: ['material-theme-lighter', 'andromeeda'],
@@ -19,4 +22,8 @@ export default defineConfig({
     }),
     icon(), // astro-icon 集成配置正确
   ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

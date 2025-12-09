@@ -1,16 +1,12 @@
 ---
 import { SiteConfig } from '../config.ts';
-import Header from '../components/Header.astro';
+import { ProfileConfig } from '../config.ts';
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import PostList from '../components/Postlist.astro';
 import { ReadingTime } from '../utils/Readtime-Wordcount';
 import { Icon } from "astro-icon/components";
 
-
-import './styles/golbal.css';
-import './styles/markdown.css'; 
-import 'animate.css';
 
 // 分页配置
 const POSTS_PER_PAGE = SiteConfig.PaginationConfig.POSTS_PER_PAGE;
@@ -37,7 +33,6 @@ const processedPosts = await Promise.all(
 
 // 按发布时间排序
 processedPosts.sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime());
-
 // 分页处理
 const totalPosts = processedPosts.length;
 const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
@@ -45,30 +40,41 @@ const startIndex = (page - 1) * POSTS_PER_PAGE;
 const paginatedPosts = processedPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 ---
 <Layout>
-    <div class="article-container">
-      <PostList posts={paginatedPosts} />
-    </div>
-    
-    <!-- 分页导航 -->
-    {totalPages > 1 && (
-      <div class="pagination">
-        <span class="pagination-info">
-          第 {page} 页 / 共 {totalPages} 页
-        </span>
-        
-        <div class="pagination-buttons">
-          {page > 1 && (
-            <a href={`/page/${page - 1}`} class="pagination-btn prev">
-              <Icon name="material-symbols:chevron-left-rounded" />
-            </a>
-          )}
-          
-          {page < totalPages && (
-            <a href={`/page/${page + 1}`} class="pagination-btn next">
-              <Icon name="material-symbols:chevron-right-rounded" />
-            </a>
-          )}
+  
+      <!-- 头像和作者信息 -->
+      {ProfileConfig.showOnHome && (
+        <div class="profile-section">
+          <div class="profile-avatar">
+            <img src={ProfileConfig.avatar} alt={ProfileConfig.name} />
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-author">@{ProfileConfig.name}</h1>
+            <p class="profile-subtitle">{ProfileConfig.desc}</p>
+          </div>
         </div>
-      </div>
-    )}
+      )}
+      
+      <PostList posts={paginatedPosts} />
+      <!-- 分页导航 -->
+      {totalPages > 1 && (
+        <div class="pagination">
+          <span class="pagination-info">
+             {page}  /  {totalPages}
+          </span>
+          
+          <div class="pagination-buttons">
+            {page > 1 && (
+              <a href={`/page/${page - 1}`} class="pagination-btn prev">
+                <Icon name="material-symbols:chevron-left-rounded" />
+              </a>
+            )}
+            
+            {page < totalPages && (
+              <a href={`/page/${page + 1}`} class="pagination-btn next">
+                <Icon name="material-symbols:chevron-right-rounded" />
+              </a>
+            )}
+          </div>
+        </div>
+      )}
 </Layout>

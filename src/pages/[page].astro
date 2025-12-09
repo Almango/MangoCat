@@ -1,15 +1,13 @@
 ---
-import Header from '../../components/Header.astro';
-import Layout from '../../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import PostList from '../../components/Postlist.astro';
-import { ReadingTime } from '../../utils/Readtime-Wordcount';
+import PostList from '../components/Postlist.astro';
+import { ReadingTime } from '../utils/Readtime-Wordcount';
 import { Icon } from "astro-icon/components";
-import { SiteConfig } from '../../config';
+import { SiteConfig } from '../config';
 
-import '../styles/golbal.css';
-import '../styles/markdown.css'; 
-import 'animate.css';
+
 
 // 分页配置
 const POSTS_PER_PAGE = SiteConfig.PaginationConfig.POSTS_PER_PAGE;
@@ -69,28 +67,26 @@ const startIndex = (page - 1) * POSTS_PER_PAGE;
 const paginatedPosts = processedPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 ---
 <Layout>
-    <div class="article-container">
       <PostList posts={paginatedPosts} />
-    </div>
-    
-    <!-- 分页导航 -->
-    <div class="pagination">
-      <span class="pagination-info">
-         {page}  /  {totalPages}
-      </span>
       
-      <div class="pagination-buttons">
-        {page > 1 && (
-          <a href={page === 2 ? '/' : `/page/${page - 1}`} class="pagination-btn prev">
-            <Icon name="material-symbols:chevron-left-rounded" />
-          </a>
-        )}
+      <!-- 分页导航 -->
+      <div class="pagination">
+        <span class="pagination-info">
+           {page}  /  {totalPages}
+        </span>
         
-        {page < totalPages && (
-          <a href={`/page/${page + 1}`} class="pagination-btn next">
-            <Icon name="material-symbols:chevron-right-rounded" />
-          </a>
-        )}
+        <div class="pagination-buttons">
+          {page > 1 && (
+            <a href={page === 2 ? '/' : `/page/${page - 1}`} class="pagination-btn prev">
+              <Icon name="material-symbols:chevron-left-rounded" />
+            </a>
+          )}
+          
+          {page < totalPages && (
+            <a href={`/page/${page + 1}`} class="pagination-btn next">
+              <Icon name="material-symbols:chevron-right-rounded" />
+            </a>
+          )}
+        </div>
       </div>
-    </div>
 </Layout>

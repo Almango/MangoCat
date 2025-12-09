@@ -1,33 +1,49 @@
 ---
-import { SiteConfig, DEVELOPER_CONFIG } from '../config';
-
+import { SiteConfig, DEVELOPER_CONFIG } from "../config";
+import { Icon } from "astro-icon/components";
 ---
-<footer class="footer">
-    <div class="footer-content">
-        <!-- 技术支持区域 -->
-        <div class="footer-section powered-section">
-            <p class="powered-by">
-                Powered by <a href="https://astro.build/" target="_blank">Astro</a> & <a href="https://github.com/Almango/MangoCat" target="_blank">MangoCat {DEVELOPER_CONFIG.THEME_VERSION}</a>
-            </p>
+
+<div class="footer-content">
+    <!-- 技术支持区域 -->
+    <div class="footer-section powered-section">
+        <p class="powered-by">
+            Powered by <a href="https://astro.build/" target="_blank">Astro</a> &
+            <a href="https://github.com/Almango/MangoCat" target="_blank"
+                >MangoCat {DEVELOPER_CONFIG.THEME_VERSION}</a
+            >
+        </p>
+    </div>
+
+    <!-- 版权信息区域 -->
+    <div class="footer-section copyright-section">
+        <div class="copyright">
+            <span class="copyright-left"
+                ><span style="font-weight: bold;font-size: 1.2em;">&copy;</span>
+                {new Date().getFullYear()}
+                <span style="font-weight: bold;">{SiteConfig.author}</span> 保留权利.</span
+            >
         </div>
+    </div>
 
-
-        <!-- 版权信息区域 -->
-        <div class="footer-section copyright-section">
-            <div class="copyright">
-                <span class="copyright-left"><span style="font-weight: bold;">&copy;</span> {new Date().getFullYear()} <span style="font-weight: bold;">{SiteConfig.author}</span> 保留权利.</span>
-                <span class="copyright-right">政策</span>
-            </div>
-        </div>
-
-        <!-- 备案信息区域 -->
-        <div class="footer-section icp-section">
-            <div class="icp-info">
-                <a href="https://icp.gov.moe/?keyword=20240146" target="_blank">萌ICP备20240146号</a>
+    <!-- 备案信息区域 -->
+    <div class="footer-section icp-section">
+        <div class="icp-info">
+            <a href="https://icp.gov.moe/?keyword=20240146" target="_blank">萌ICP备20240146号</a>
+            <div class="icp-icons">
+                <!-- 常用社交媒体和联系图标 -->
+                <a href={SiteConfig.siteUrl + "/rss.xml"} target="_blank" class="rss-icon">
+                    <Icon name="mdi:rss" class="social-icon" title="RSS" />
+                </a>
+                <a href="#" target="_blank" class="email-icon">
+                    <Icon name="mdi:email" class="social-icon" title="邮箱" />
+                </a>
+                <a href={"https://github.com/Almango/MangoCat"} target="_blank" class="github-icon">
+                    <Icon name="mdi:github" class="social-icon" title="GitHub" />
+                </a>
             </div>
         </div>
     </div>
-</footer>
+</div>
 
 <style>
     @media (max-width: 768px) {
@@ -35,18 +51,12 @@ import { SiteConfig, DEVELOPER_CONFIG } from '../config';
             padding: 0 20px;
         }
     }
-    .footer {
-        color: var(--text-color);
-        padding: 20px 0 10px;
-        border-top: 2px dashed var(--info-font-color);
-        width: 90%;
-        margin: 0 auto;
-        max-width: 700px;
-    }
-
     .footer-content {
+        border-top: 2px dashed var(--info-font-color);
+        color: var(--text-color);
         gap: 10px;
         align-items: center;
+        padding: 20px 0 10px;
         /* margin: 0 auto */
     }
 
@@ -54,9 +64,8 @@ import { SiteConfig, DEVELOPER_CONFIG } from '../config';
         font-size: 1em;
         margin: 0;
         padding-bottom: 2px;
-
     }
-    
+
     .copyright {
         font-size: 0.8em;
         margin: 0;
@@ -66,9 +75,50 @@ import { SiteConfig, DEVELOPER_CONFIG } from '../config';
         color: var(--text-color);
         padding-bottom: 2px;
     }
+    .copyright-right {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* 控制图标之间的间距 */
+    }
+
+    /* 新的社交图标样式 */
+    .social-icon {
+        width: 18px; /* 增大图标尺寸 */
+        height: 18px;
+        color: var(--text-color);
+        fill: var(--text-color);
+        transition: all 0.3s ease;
+        opacity: 0.8;
+        padding: 4px;
+        border-radius: 6px;
+    }
+
+    .social-icon:hover {
+        color: var(--theme-color);
+        fill: var(--theme-color);
+        opacity: 1;
+        background-color: var(--hover-color);
+    }
+
+    /* 旧的rss-icon样式保持兼容 */
+    .rss-icon {
+        width: 24px;
+        height: 24px;
+        color: var(--text-color);
+        transition: all 0.3s ease;
+    }
 
     .icp-info {
         font-size: 0.8em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .icp-icons {
+        display: flex;
+        gap: 8px; /* 图标之间的间距 */
     }
 
     a {
@@ -81,5 +131,4 @@ import { SiteConfig, DEVELOPER_CONFIG } from '../config';
     a:hover {
         color: var(--theme-color);
     }
-
 </style>

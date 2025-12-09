@@ -1,39 +1,60 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import { SiteConfig } from '../../config';
+import Postfooter from '../../components/Postfooter.astro';
 
-import '../styles/golbal.css';
-import '../styles/markdown.css';
-import 'animate.css';
 // 获取所有文章用于生成静态路径
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  return posts.map((post) => ({ 
+  // 获取所有文章并按发布日期排序（倒序）
+  const posts = await getCollection('posts', (post) => post.data.draft !== true);
+  posts.sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime());
+  
+  return posts.map((post, index) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: {
+      post,
+      prevPost: index < posts.length - 1 ? posts[index + 1] : null, // 上一篇（更早的文章）
+      nextPost: index > 0 ? posts[index - 1] : null, // 下一篇（更新的文章）
+    },
   }));
 }
 
 // 接收文章数据
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await post.render();
+
+// 获取分类配置
+const categoryConfig = post.data.category ? SiteConfig.Categories[post.data.category] : null;
 ---
 <Layout pagetitle={`${post.data.title}`}>
-		<div class="article-container " >
-			<article class="article-card ">
-				<header class="article-header">
-					<h1 class="article-title animate__flipInX animate__animated animate__delay-0.5s">{post.data.title}</h1>
-					<div class="article-meta animate__animated animate__fadeInUp animate__delay-0.1s">
-						<span>发布于：{new Date(post.data.published).toISOString().slice(0, 19).replace('T', ' ')}</span>
-						{post.data.category && <span>{post.data.category}</span>}
-						{post.data.tags.length > 0 && (
-							<span>{post.data.tags.join(', ')}</span>
-						)}
-					</div>
-				</header>
-				<div class="article-content">
-					<Content />
+		<article class="article-card ">
+			<header class="article-header animate__animated animate__fadeInUp animate__delay-0.1s">
+				<h1 class="article-title animate__flipInX animate__animated animate__delay-0.5s">{post.data.title}</h1>
+				<div class="article-meta animate__animated animate__fadeInUp animate__delay-0.1s">
+					<span>
+						<Icon name="material-symbols:date-range" />
+						发布于：{new Date(post.data.published).toISOString().slice(0, 19).replace('T', ' ')}
+					</span>
+					{post.data.category && (
+						<span style={{ color: categoryConfig?.color || 'inherit' }}>
+							<Icon name={categoryConfig?.icon || 'material-symbols:category'} />
+							{post.data.category}
+						</span>
+					)}
+					{post.data.tags.length > 0 && (
+						<span>
+							<Icon name="material-symbols:label" />
+							{post.data.tags.join(', ')}
+						</span>
+					)}
 				</div>
-			</article>
-		</div>
+			</header>
+			<div class="article-content">
+				<Content />
+			</div>
+			<!-- 使用Postfooter组件 -->
+			<Postfooter post={post} prevPost={prevPost} nextPost={nextPost} />
+		</article>
 </Layout>
