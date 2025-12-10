@@ -43,6 +43,7 @@ const paginatedPosts = processedPosts.slice(startIndex, startIndex + POSTS_PER_P
   
       <!-- 头像和作者信息 -->
       {ProfileConfig.showOnHome && (
+        <a href="/about" class="profile-link">
         <div class="profile-section">
           <div class="profile-avatar">
             <img src={ProfileConfig.avatar} alt={ProfileConfig.name} />
@@ -52,6 +53,7 @@ const paginatedPosts = processedPosts.slice(startIndex, startIndex + POSTS_PER_P
             <p class="profile-subtitle">{ProfileConfig.desc}</p>
           </div>
         </div>
+        </a>
       )}
       
       <PostList posts={paginatedPosts} />

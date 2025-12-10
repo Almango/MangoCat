@@ -1,0 +1,200 @@
+---
+import { SiteConfig } from '../config.ts';
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { ReadingTime } from '../utils/Readtime-Wordcount';
+import { Icon } from "astro-icon/components";
+
+// 读取所有文章数据
+const posts = await getCollection('posts', (post) => post.data.draft !== true);
+
+// 计算每篇文章的字数
+const processedPosts = await Promise.all(
+  posts.map(async (post) => {
+    const readingTimeResults = await ReadingTime(post.body);
+    return {
+      ...post,
+      data: {
+        ...post.data,
+        wordCount: readingTimeResults.words, // 添加 wordCount 字段
+      },
+    };
+  })
+);
+
+// 按发布时间降序排序
+processedPosts.sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime());
+
+// 按年份分组文章
+const postsByYear = processedPosts.reduce((acc, post) => {
+  const date = new Date(post.data.published);
+  const year = date.getFullYear();
+  
+  if (!acc[year]) {
+    acc[year] = {
+      year,
+      posts: []
+    };
+  }
+  
+  acc[year].posts.push(post);
+  return acc;
+}, {} as Record<string, { year: number; posts: typeof processedPosts }>);
+
+// 转换为数组以便渲染
+const sortedYears = Object.values(postsByYear).sort((a, b) => {
+  // 按年份降序排序
+  return b.year - a.year;
+});
+---
+<Layout pagetitle={`归档 - ${SiteConfig.title}`}>
+  <div class="archive-container">
+    <h1 class="text-3xl font-bold">归档</h1>
+    <p class="archive-subtitle">共 {processedPosts.length} 篇文章</p>
+    
+    <div class="archive-content">
+      {sortedYears.map((yearData) => (
+        <div class="archive-year" key={yearData.year}>
+          <h2 class="archive-year-title">
+            {yearData.year}
+            <span class="archive-post-count">({yearData.posts.length} 篇)</span>
+          </h2>
+          
+          <div class="archive-post-list">
+            {yearData.posts.map((post) => {
+              const postDate = new Date(post.data.published);
+              const monthDay = postDate.toISOString().substring(5, 10); // 提取月日部分 (MM-DD)
+              return (
+                <div class="archive-post-item" key={post.slug}>
+                  <a href={`/posts/${post.slug}`} class="archive-post-link">
+                    <span class="archive-post-date">
+                      {monthDay}
+                    </span>
+                    <span class="archive-post-title">{post.data.title}</span>
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .archive-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+
+  
+  .archive-subtitle {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 40px;
+  }
+  
+  .archive-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .archive-year {
+    border-radius: 8px;
+    box-shadow: 0 1px 3px var(--shadow-color);
+  }
+  
+  .archive-year-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .archive-post-count {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: var(--info-bg-color);
+    padding: 4px 12px;
+    border-radius: 8px;
+  }
+  
+  .archive-post-list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .archive-post-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .archive-post-item:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+  }
+  
+  .archive-post-link {
+    text-decoration: none;
+    color: var(--title-color);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0 10px 20px;
+  }
+  
+  
+  .archive-post-date {
+    font-size: 15px;
+    color: var(--info-font-color);
+    font-weight: 500;
+    min-width: 60px;
+  }
+  
+  .archive-post-title {
+    font-size: 15px;
+    font-weight: 500;
+    flex: 1;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .archive-title {
+      font-size: 1.8rem;
+    }
+    .archive-post-date{
+    min-width: 20px;    
+}
+    
+    .archive-post-item{
+        padding: 0;
+    }
+    .archive-year-title {
+      font-size: 1.3rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .archive-post-link, .archive-post-link span {
+      gap: 10px;
+     font-size: 14px;
+
+    }
+  }
+</style>

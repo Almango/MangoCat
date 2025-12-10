@@ -18,7 +18,7 @@ export const SiteConfig: SiteConfigType = {
     }
   },
   NavConfig: [
-    { name: '归档', path: '#' },
+    { name: '归档', path: '/archive' },
     { name: '分类', path: '#' },
     { name: '友链', path: '#' },
     { name: '关于', path: '/about' },
@@ -33,5 +33,5 @@ export const ProfileConfig = {
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.5.8',
+  THEME_VERSION: '0.6',
 }

@@ -170,7 +170,7 @@ body {
     border: none;
     box-shadow: var(--shadow-color) 0px 1px 3px 0px, var(--shadow-color) 0px 0px 0px 1px;
     background-color: transparent;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 6px;
     color: var(--text-color);
     font-size: 18px;
@@ -235,7 +235,7 @@ body {
 .theme-toggle {
     box-shadow: var(--shadow-color) 0px 1px 3px 0px, var(--shadow-color) 0px 0px 0px 1px;
     background-color: transparent;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 6px;
     cursor: pointer;
     font-size: 14px;
@@ -315,7 +315,7 @@ body {
 .post-info .word-count {
     background-color: var(--info-bg-color);
     padding: 5px 10px;
-    border-radius: 12px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -392,7 +392,7 @@ body {
 
 .article-meta span {
     background-color: var(--info-bg-color);
-    border-radius: 12px;
+    border-radius: 8px;
     white-space: nowrap;
     padding: 5px 12px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -438,7 +438,7 @@ body {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     
-    border-radius: 6px;
+    border-radius: 8px;
     color: var(--text-color);
     font-size: 0.9em;
     transition: all 0.3s ease;
@@ -462,7 +462,7 @@ body {
     height: 40px;
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 8px;
     color: var(--text-color);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -493,7 +493,7 @@ body {
     align-items: center;
     gap: 15px;
     margin-bottom: 30px;
-    border-radius: 12px;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
@@ -501,7 +501,7 @@ body {
 .profile-avatar {
     width: 60px;
     height: 60px;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     border: 2px solid var(--shadow-color);
     transition: all 0.3s ease;
