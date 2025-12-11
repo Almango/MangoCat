@@ -3,13 +3,18 @@ import expressiveCode from 'astro-expressive-code';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import remarkBreaks from 'remark-breaks';
 import icon from 'astro-icon';
-import simpleTips from 'simple-tips';
 import tailwindcss from '@tailwindcss/vite';
+import remarkDirective from 'remark-directive'
+import simpleTips from 'simple-tips'
 
 export default defineConfig({
   markdown: {
-    plugins: [simpleTips],
-    remarkPlugins: [remarkBreaks],
+
+    remarkPlugins: [
+      remarkBreaks,
+      remarkDirective,        // 必须在前
+      [simpleTips, { allow: ['note', 'tip', 'warning', 'caution'] }]
+    ],
     gfm: true,
   },
   integrations: [
