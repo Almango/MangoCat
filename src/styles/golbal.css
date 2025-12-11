@@ -85,9 +85,46 @@ html, body {
     background-attachment: fixed;
 }
 
+
 /* 为页面内容添加顶部边距，避免被固定的 header 遮挡 */
 body {
     padding-top: 70px;
+}
+
+
+.admonition {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-left: 5px solid;
+}
+
+.admonition-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.admonition-note {
+  border-color: rgb(44, 142, 255);
+  background-color: rgba(44, 142, 255, 0.1);
+  color: rgb(44, 142, 255);
+}
+
+.admonition-tip {
+  border-color: rgba(54, 201, 120, 1);
+  background-color: rgba(54, 201, 120, 0.1);
+  color: rgba(54, 201, 120, 1);
+}
+
+.admonition-warning {
+  border-color: rgba(255, 57, 57, 1);
+  background-color: rgba(255, 57, 57, 0.1);
+  color: rgba(255, 57, 57, 1);
+}
+
+.admonition-caution {
+  border-color: rgba(255, 166, 0, 1);
+  background-color: rgba(255, 166, 0, 0.1);
+  color: rgba(255, 166, 0, 1);
 }
 
 /* 通用容器样式 */

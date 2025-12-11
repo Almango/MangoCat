@@ -17,9 +17,11 @@
     "astro-icon": "^1.1.5",
     "astro-theme-toggle": "^0.8.0",
     "mangocat": "link:",
+    "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "rehype-stringify": "^10.0.1",
     "remark-rehype": "^11.1.2",
+    "simple-tips": "^4.5.0",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {

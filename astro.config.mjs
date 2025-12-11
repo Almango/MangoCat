@@ -3,15 +3,15 @@ import expressiveCode from 'astro-expressive-code';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import remarkBreaks from 'remark-breaks';
 import icon from 'astro-icon';
-
+import simpleTips from 'simple-tips';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   markdown: {
+    plugins: [simpleTips],
     remarkPlugins: [remarkBreaks],
     gfm: true,
   },
-
   integrations: [
     expressiveCode({
       themes: ['material-theme-lighter', 'andromeeda'],

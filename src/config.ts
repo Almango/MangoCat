@@ -3,7 +3,7 @@ import type { SiteConfigType } from './utils/types';
 
 export const SiteConfig: SiteConfigType = {
   title: 'Almango',
-  author: 'MangoCat',
+  author: 'Almango',
   favicon: '/favicon.png',
   desc: '天真永不消逝，浪漫至死不渝',
   siteUrl: 'https://test.almango.cn',
