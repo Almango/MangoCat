@@ -1,0 +1,280 @@
+---
+import { SiteConfig } from '../config.ts';
+import Layout from '../layouts/Layout.astro';
+import { Icon } from "astro-icon/components";
+
+// 友链数据，直接集成在页面中
+const links = [
+  {
+		name: "松坂希奈子",
+		description: "这个世界很大❤",
+		url: "https://blog.mysqil.com/",
+		avatar: "https://blog.mysqil.com/_astro/avatar.D239-k4C_ZU0B2r.webp",
+	},
+	{
+		name: "张洪Heo",
+		description: "分享设计与科技生活",
+		url: "https://blog.zhheo.com/",
+		avatar: "https://bu.dusays.com/2022/12/28/63ac2812183aa.png",
+	},
+	{
+		name: "定の栈",
+		description: "LINK START!",
+		url: "https://saop.cc",
+		avatar: "https://saop.cc/avatar.webp",
+	},
+	{
+		name: "栖童の小站",
+		description: "越努力，越幸运.",
+		url: "https://blog.linux-qitong.top/",
+		avatar: "https://blog.linux-qitong.top/img/avatar.webp",
+	},
+	{
+		name: "卿以君歌",
+		description: "幻术的世界有什么不好？",
+		url: "https://www.mekimto.cn/",
+		avatar: "https://q1.qlogo.cn/g?b=qq&nk=2882740&s=100",
+	},
+	{
+		name: "Revincx",
+		description: "可爱就是正义~",
+		url: "https://blog.revincx.icu/",
+		avatar:
+			"https://cdn.jsdelivr.net/gh/Revincx/blog-assets@master/images/avatar.jpg",
+	},
+	{
+		name: "懒觉猫先生",
+		description: "阿巴阿巴阿巴..",
+		url: "https://blog.luoaicheng.cn/",
+		avatar: "https://pic.imgdb.cn/item/64c65629a9eb352efd93a379.webp",
+	},
+	{
+		name: "三玖の博客",
+		description: "Forgive or Forget.",
+		url: "https://blog.yuuka.top/",
+		avatar: "https://q1.qlogo.cn/g?b=qq&nk=1973323029&s=100",
+	},
+	{
+		name: "YOUXIANYU",
+		description: "唐人曾",
+		url: "https://youxianyu.cn/",
+		avatar: "https://www.youxianyu.cn/img/c.c.jpg",
+	},
+	{
+		name: "探人间",
+		description: "努力吃上更贵的雪糕！",
+		url: "https://www.hydsb0.com",
+		avatar: "https://s21.ax1x.com/2025/07/13/pVlsr8S.jpg",
+	},
+	{
+		name: "李小白",
+		description: "风共舞，随心而行",
+		url: "https://blog.lxb.icu/",
+		avatar: "https://q1.qlogo.cn/g?b=qq&nk=648226460&s=640",
+	},
+	{
+		name: "清欲の小窝",
+		description: "沙雕网友清欲的碎碎念",
+		url: "https://blog.leoo.fun",
+		avatar: "https://bu.dusays.com/2024/11/11/6731ad4c16396.jpg",
+	},
+	{
+		name: "鈴奈咲桜",
+		description: "愛することを忘れないで",
+		url: "https://blog.sakura.ink",
+		avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
+	},
+	{
+		name: "JustPureH2O",
+		description: "穷方圆平直之情，尽规矩准绳之用。",
+		url: "https://justpureh2o.cn",
+		avatar: "https://img.justpureh2o.cn/image/667f85b1d9c307b7e9ef9f2c.jpg",
+	},
+	{
+		name: "bbb-lsy07",
+		description: "科技激荡人文，洞见智慧本真。",
+		url: "https://blog.6uu.us/",
+		avatar:
+			"https://blog.6uu.us/upload/87790bc9-63eb-4420-ae4f-75872fec057d.png",
+	},
+	{
+		name: "ElysiumStack",
+		description: "不会摄影的设计师不是优秀的旅行家",
+		url: "https://www.elysium-stack.cn/",
+		avatar:
+			"https://www.elysium-stack.cn/upload/ee0757e6-ebb4-46d0-a388-660f648653ea.jpg",
+	},
+	{
+		name: "小林の木屋",
+		description: "一个黑客小子！",
+		url: "https://www.wjlin0.com",
+		avatar: "https://www.wjlin0.com/upload/log.png",
+	},
+	{
+		name: "ATao-Blog",
+		description: "做自己喜欢的事",
+		url: "https://blog.atao.cyou",
+		avatar: "https://cdn.taonotespace.com/Web/Avatar.png",
+	},
+	{
+		name: "mccsjs",
+		description: "素敵な一日が始まります🎉🎉🎉",
+		url: "https://mccsjs.eu.org/",
+		avatar: "https://mccsjs.eu.org/img/head.jpg",
+	},
+	{
+		name: "萧北",
+		description: "拥抱变化，享受过程",
+		url: "https://xn--djrr55i.top/",
+		avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=3790300010&spec=5",
+	},
+];
+---
+
+<Layout pagetitle={`友链 - ${SiteConfig.title}`}>
+  <div class="links-container">
+    <h1 class="text-3xl font-bold" style="color: var(--title-color);">友链</h1>
+    <p class="links-subtitle">与我连接的朋友们</p>
+    
+    <div class="links-grid">
+      {links.map((link, index) => (
+        <div class="link-card animate-slide-in" style={{ animationDelay: `${index * 0.1}s` }} data-key={link.name}>
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-card-inner">
+            <div class="link-avatar-container">
+              <img src={link.avatar} alt={link.name} class="link-avatar" />
+            </div>
+            <div class="link-info">
+              <div class="link-header">
+                <h3 class="link-name">{link.name}</h3>
+                <Icon name="mdi:external-link" class="link-icon" />
+              </div>
+              <p class="link-description">{link.description}</p>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .links-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .links-subtitle {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 30px;
+  }
+  
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+  
+  .link-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px var(--shadow-color);
+  }
+  
+  .link-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--theme-color);
+  }
+  
+  .link-card-inner {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    gap: 12px;
+  }
+  
+  .link-avatar-container {
+    flex-shrink: 0;
+  }
+  
+  .link-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+  }
+  
+  .link-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .link-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  
+  .link-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .link-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--text-color);
+    opacity: 0.6;
+  }
+  
+  .link-description {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .links-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .link-card-inner {
+      padding: 12px;
+      gap: 12px;
+    }
+    
+    .link-avatar {
+      width: 56px;
+      height: 56px;
+    }
+    
+    .link-name {
+      font-size: 1rem;
+    }
+    
+    .link-description {
+      font-size: 0.85rem;
+    }
+  }
+</style>

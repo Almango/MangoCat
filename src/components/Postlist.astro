@@ -33,15 +33,15 @@ function getCategoryConfig(category: string): { icon: string; color: string } {
 interface PostWithCategoryConfig extends Post {
     categoryConfig: { icon: string; color: string };
 }
-// 预处理文章数据，添加分类配置
-const processedPosts = posts.map((post: Post) => ({
+// 预处理文章数据，添加分类配置和动画索引
+const processedPosts = posts.map((post: Post, index: number) => ({
     ...post,
-    categoryConfig: getCategoryConfig(post.data.category)
-})) as PostWithCategoryConfig[];
+    categoryConfig: getCategoryConfig(post.data.category),
+    animationIndex: index
+})) as (PostWithCategoryConfig & { animationIndex: number })[];
 ---
-{
-    processedPosts.map((post: PostWithCategoryConfig) => (
-        <a href={`/posts/${post.slug}`}class="post-card animate__animated animate__fadeInUp animate__delay-100ms">
+{    processedPosts.map((post: (PostWithCategoryConfig & { animationIndex: number })) => (
+        <a href={`/posts/${post.slug}`}class="post-card animate-slide-in" style={`animation-delay: ${post.animationIndex * 0.05}s`} >
             <div class="post-content">
                 <div class="post-title">
                     <h2>{post.data.title}</h2>

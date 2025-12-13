@@ -18,19 +18,17 @@
     "astro-theme-toggle": "^0.8.0",
     "astro-tips": "^1.4.2",
     "mangocat": "link:",
-    "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "rehype-stringify": "^10.0.1",
     "remark-rehype": "^11.1.2",
-    "simple-tips": "^6.0.0",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "twikoo": "^1.6.44"
   },
   "devDependencies": {
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/material-symbols": "^1.2.49",
     "@iconify-json/mdi": "^1.2.3",
     "@mdx-js/mdx": "^3.1.1",
-    "remark-breaks": "^4.0.0",
-    "remark-directive": "^4.0.0"
+    "remark-breaks": "^4.0.0"
   }
 }

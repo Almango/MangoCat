@@ -4,11 +4,9 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 const { title, favicon } = SiteConfig;
 const { pagetitle, children } = Astro.props;
-
 import "../styles/golbal.css";
 import "../styles/markdown.css";
-import "animate.css";
-import "simple-tips/styles.css";
+
 // 使用页面传递的标题，如果没有则使用默认标题
 const pageTitle = pagetitle || title;
 ---
@@ -20,17 +18,15 @@ const pageTitle = pagetitle || title;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <link rel="icon" type="image/svg+xml" href={favicon} />
+    
   </head>
   <body>
-
-    
     <Header />
-    <div class="container">
+    <div class="container " >
       <br>
       <slot />
       <Footer />
     </div>
-
     </div>
   </body>
 </html>

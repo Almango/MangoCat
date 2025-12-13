@@ -4,16 +4,13 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import remarkBreaks from 'remark-breaks';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
-import remarkDirective from 'remark-directive'
-import simpleTips from 'simple-tips'
 
 export default defineConfig({
   markdown: {
 
     remarkPlugins: [
       remarkBreaks,
-      remarkDirective,        // 必须在前
-      [simpleTips, { allow: ['note', 'tip', 'warning', 'caution'] }]
+
     ],
     gfm: true,
   },
@@ -29,9 +26,6 @@ export default defineConfig({
   ],
 
   vite: {
-    plugins: [tailwindcss()],
-    ssr: {
-      noExternal: ['animate.css']
-    }
+    plugins: [tailwindcss()]
   },
 });

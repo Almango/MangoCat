@@ -2,8 +2,9 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
-import { SiteConfig } from '../../config';
+import { SiteConfig, CommentConfig } from '../../config';
 import Postfooter from '../../components/Postfooter.astro';
+import Comment from '../../components/Comment.astro';
 
 // 获取所有文章用于生成静态路径
 export async function getStaticPaths() {
@@ -29,10 +30,10 @@ const { Content } = await post.render();
 const categoryConfig = post.data.category ? SiteConfig.Categories[post.data.category] : null;
 ---
 <Layout pagetitle={`${post.data.title}`}>
-		<article class="article-card ">
-			<header class="article-header animate__animated animate__fadeInUp animate__delay-0.1s">
-				<h1 class="article-title animate__flipInX animate__animated animate__delay-0.5s">{post.data.title}</h1>
-				<div class="article-meta animate__animated animate__fadeInUp animate__delay-0.1s">
+		<article class="article-card">
+			<header class="article-header">
+				<h1 class="article-title">{post.data.title}</h1>
+				<div class="article-meta">
 					<span>
 						<Icon name="material-symbols:date-range" />
 						发布于：{new Date(post.data.published).toISOString().slice(0, 19).replace('T', ' ')}
@@ -51,10 +52,13 @@ const categoryConfig = post.data.category ? SiteConfig.Categories[post.data.cate
 					)}
 				</div>
 			</header>
-			<div class="article-content">
-				<Content />
+			<div class="article-content animate-slide-in">
+				<Content/>
 			</div>
 			<!-- 使用Postfooter组件 -->
 			<Postfooter post={post} prevPost={prevPost} nextPost={nextPost} />
+			
+			<!-- 评论区 -->
+			<Comment />
 		</article>
 </Layout>

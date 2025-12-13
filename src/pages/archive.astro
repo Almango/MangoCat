@@ -46,6 +46,14 @@ const sortedYears = Object.values(postsByYear).sort((a, b) => {
   // 按年份降序排序
   return b.year - a.year;
 });
+
+// 为每个文章项添加索引，用于计算动画延迟
+let postIndex = 0;
+for (const yearData of sortedYears) {
+  for (const post of yearData.posts) {
+    post.animationIndex = postIndex++;
+  }
+}
 ---
 <Layout pagetitle={`归档 - ${SiteConfig.title}`}>
   <div class="archive-container">
@@ -54,7 +62,7 @@ const sortedYears = Object.values(postsByYear).sort((a, b) => {
     
     <div class="archive-content">
       {sortedYears.map((yearData) => (
-        <div class="archive-year" key={yearData.year}>
+        <div class="archive-year" data-year={yearData.year}>
           <h2 class="archive-year-title">
             {yearData.year}
             <span class="archive-post-count">({yearData.posts.length} 篇)</span>
@@ -65,8 +73,8 @@ const sortedYears = Object.values(postsByYear).sort((a, b) => {
               const postDate = new Date(post.data.published);
               const monthDay = postDate.toISOString().substring(5, 10); // 提取月日部分 (MM-DD)
               return (
-                <div class="archive-post-item" key={post.slug}>
-                  <a href={`/posts/${post.slug}`} class="archive-post-link">
+                <div class="archive-post-item animate-slide-in" key={post.slug} style={{ animationDelay: `${post.animationIndex * 0.05}s` }}>
+                  <a href={`/posts/${post.slug}`} class="archive-post-link ">
                     <span class="archive-post-date">
                       {monthDay}
                     </span>
@@ -144,7 +152,7 @@ const sortedYears = Object.values(postsByYear).sort((a, b) => {
   
   .archive-post-item:hover {
     background-color: var(--hover-color);
-    box-shadow: 0 2px 5px var(--shadow-color);
+    border: 1px solid var(--theme-color);
   }
   
   .archive-post-link {

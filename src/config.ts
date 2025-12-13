@@ -19,8 +19,7 @@ export const SiteConfig: SiteConfigType = {
   },
   NavConfig: [
     { name: '归档', path: '/archive' },
-    { name: '分类', path: '#' },
-    { name: '友链', path: '#' },
+    { name: '友链', path: '/link' },
     { name: '关于', path: '/about' },
   ],
 }
@@ -32,6 +31,15 @@ export const ProfileConfig = {
   showOnHome: true, // 控制是否在主页显示头像和作者信息
 }
 
+export const CommentConfig = {
+  enable: true, // 是否启用评论功能
+  provider: 'twikoo', // 评论提供商：twikoo
+  twikoo: {
+    envId: 'almango.fun', // Twikoo 环境 ID，需要用户填写自己的环境 ID
+    path: '', // 当前页面路径将在组件中动态获取
+  }
+}
+
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.6.1',
+  THEME_VERSION: '0.7.5',
 }

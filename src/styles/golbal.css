@@ -87,47 +87,31 @@ html, body {
     background-attachment: fixed;
 }
 
+/* 定义slide-in动画 */
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 应用slide-in动画的类 */
+.animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+    opacity: 0; /* 初始状态为透明 */
+}
+
+
 
 /* 为页面内容添加顶部边距，避免被固定的 header 遮挡 */
 body {
     padding-top: 70px;
 }
 
-
-/* .admonition {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-left: 5px solid;
-}
-
-.admonition-title {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.admonition-note {
-  border-color: rgb(44, 142, 255);
-  background-color: rgba(44, 142, 255, 0.1);
-  color: rgb(44, 142, 255);
-}
-
-.admonition-tip {
-  border-color: rgba(54, 201, 120, 1);
-  background-color: rgba(54, 201, 120, 0.1);
-  color: rgba(54, 201, 120, 1);
-}
-
-.admonition-warning {
-  border-color: rgba(255, 57, 57, 1);
-  background-color: rgba(255, 57, 57, 0.1);
-  color: rgba(255, 57, 57, 1);
-}
-
-.admonition-caution {
-  border-color: rgba(255, 166, 0, 1);
-  background-color: rgba(255, 166, 0, 0.1);
-  color: rgba(255, 166, 0, 1);
-} */
 
 /* 通用容器样式 */
 
@@ -659,31 +643,4 @@ body {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
-}
-
-/* 强制元素使用自定义动画名（优先级最高） */
-.animate__animated.animate__fadeInUp {
-  animation-name: fadeInUpCustom !important; /* 覆盖默认fadeInUp */
-  --animate-duration: 0.5s;
-  --animate-delay: 0.1s;
-  transform-origin: top center;
-}
-
-/* 动画持续时间 */
-.animate__animated {
-  --animate-duration: 0.6s;
-  --animate-delay: 0s;
-  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* 确保fadeInUp动画速度一致 */
-.animate__animated.animate__fadeInUp {
-  --animate-duration: 0.5s;
-  --animate-delay: 0.1s;
-  transform-origin: top center;
-}
-
-/* 自定义迭代次数 */
-.animate__bounce {
-  --animate-iteration-count: infinite;
 }
