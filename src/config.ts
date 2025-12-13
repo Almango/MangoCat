@@ -32,14 +32,14 @@ export const ProfileConfig = {
 }
 
 export const CommentConfig = {
-  enable: true, // 是否启用评论功能
-  provider: 'twikoo', // 评论提供商：twikoo
+  enable: false, 
+  provider: 'twikoo', 
   twikoo: {
-    envId: 'almango.fun', // Twikoo 环境 ID，需要用户填写自己的环境 ID
-    path: '', // 当前页面路径将在组件中动态获取
+    envId: '', 
+    path: '', 
   }
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.7.5',
+  THEME_VERSION: '0.7.8',
 }
