@@ -32,14 +32,14 @@ export const ProfileConfig = {
 }
 
 export const CommentConfig = {
-  enable: false, 
+  enable: true, 
   provider: 'twikoo', 
   twikoo: {
-    envId: '', 
-    path: '', 
+    envId: 'https://www.almango.fun/', 
+    path: 'auto', 
   }
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.7.8',
+  THEME_VERSION: '0.8.2',
 }

@@ -2,7 +2,7 @@
 import { SiteConfig } from '../config.ts';
 import Layout from '../layouts/Layout.astro';
 import { Icon } from "astro-icon/components";
-
+import Comment from '../components/Comment.astro';
 // 友链数据，直接集成在页面中
 const links = [
   {
@@ -128,7 +128,14 @@ const links = [
 		url: "https://xn--djrr55i.top/",
 		avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=3790300010&spec=5",
 	},
+  {
+    name: "Nebula Blog",
+		description: "Nebula.SYS",
+		url: "https://www.996icu.eu.org/",
+		avatar: "https://img.scdn.io/i/692d847f79589_1764590719.webp"
+  }
 ];
+
 ---
 
 <Layout pagetitle={`友链 - ${SiteConfig.title}`}>
@@ -154,6 +161,9 @@ const links = [
         </div>
       ))}
     </div>
+    
+    <!-- 评论区 -->
+    <Comment />
   </div>
 </Layout>
 

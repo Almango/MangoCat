@@ -249,7 +249,7 @@
 /* 粗体和斜体 */
 .article-content strong {
     font-weight: bold;
-    color: var(--text-color);
+    color: var(--title-color);
 }
 
 .article-content em {

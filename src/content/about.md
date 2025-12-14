@@ -5,6 +5,7 @@ Astro 集多功能于一体的 Web 框架。它内置包含了你构建网站所
 
 **🎨主题** : MangoCat (beta)
 更偏向于简洁、现代的设计风格，更多功能正在开发中...
+样式参考：[吐司气泡](https://blog.toastbubble.top/)、[Clarity](https://github.com/L33Z22L11/blog-v3)、[Pure](https://github.com/cworld1/astro-theme-pure)、
 
 ### 测试版
 
@@ -12,10 +13,6 @@ Astro 集多功能于一体的 Web 框架。它内置包含了你构建网站所
 
 
 ### 政策（beta）
-
-!!!note
-这是一个笔记提示框
-!!!
 
 #### 隐私权限
 

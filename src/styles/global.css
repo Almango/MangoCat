@@ -6,10 +6,10 @@
     --theme-color: #1b6cd6ff;
     --bg-color: #f8f9fa;
     --title-color: #151515;
-    --text-color: #454545;
+    --text-color: #0d0d0d;
     --card-bg: #fff;
     --header-footer-bg-color: #fafbfc;
-    --border-color: #dddddd;
+    --border-color: #cecece;
     --grid-line-color: #eeeeee;
     /* 专门用于背景网格的颜色 */
     --hover-color: #eeeeee;
@@ -514,7 +514,7 @@ border: 2px dashed var(--border-color);
     height: 60px;
     border-radius: 8px;
     overflow: hidden;
-    border: 2px solid var(--shadow-color);
+    border: 2px solid var(--border-color);
     transition: all 0.3s ease;
     cursor: pointer;
 }

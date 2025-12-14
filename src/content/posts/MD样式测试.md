@@ -11,24 +11,4 @@ slug: 07x3d8x
 
 # Simple Tips 测试
 
-:::note
-这是一个测试笔记
-:::
-
-:::tip
-这是一个测试提示
-:::
-:::tip
-这是一个 *tip* 提示框。
-:::
-
-:::warning
-这是一个 [warning] 提示框。
-:::
-
-:::caution
-这是一个 `caution` 提示框。
-:::
-
-
 
