@@ -1,0 +1,83 @@
+<script is:inline>
+  // 确保DOM加载完成后再执行脚本
+  document.addEventListener('DOMContentLoaded', () => {
+    // 返回顶部按钮的显示/隐藏逻辑
+    const backtopBtn = document.getElementById('backtop-btn');
+    
+    // 防止按钮不存在的情况
+    if (!backtopBtn) return;
+    
+    // 检查滚动位置的函数
+    function checkScrollPosition() {
+      // 当滚动距离超过300px时显示按钮
+      if (window.scrollY > 300) {
+        backtopBtn.classList.add('show');
+      } else {
+        backtopBtn.classList.remove('show');
+      }
+    }
+    
+    // 监听滚动事件
+    window.addEventListener('scroll', checkScrollPosition);
+    
+    // 页面加载完成后立即检查滚动位置
+    checkScrollPosition();
+    
+    // 返回顶部功能
+    backtopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 平滑滚动
+      });
+    });
+  });
+</script>
+
+<button id="backtop-btn" class="backtop-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<style>
+  .backtop-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 8px;
+    background-color: var(--header-footer-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    z-index: 999;
+  }
+  
+  .backtop-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .backtop-btn:hover {
+    border-color: var(--theme-color);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .backtop-btn {
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+</style>

@@ -2,6 +2,7 @@
 import { SiteConfig } from "../config";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Backtop from "../components/Backtop.astro";
 const { title, favicon } = SiteConfig;
 const { pagetitle, children } = Astro.props;
 import "../styles/global.css";
@@ -27,6 +28,6 @@ const pageTitle = pagetitle || title;
       <slot />
       <Footer />
     </div>
-    </div>
+    <Backtop />
   </body>
 </html>
