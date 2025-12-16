@@ -6,7 +6,7 @@ export const SiteConfig: SiteConfigType = {
   author: 'Almango',
   favicon: '/favicon.png',
   desc: '天真永不消逝，浪漫至死不渝',
-  siteUrl: 'https://test.almango.cn',
+  siteUrl: 'https://blog.almango.cn',
   PaginationConfig: {
     POSTS_PER_PAGE: 6,    // 每页显示的文章数量
     },
@@ -20,6 +20,7 @@ export const SiteConfig: SiteConfigType = {
   NavConfig: [
     { name: '归档', path: '/archive' },
     { name: '友链', path: '/link' },
+    { name: '项目', path: '/project' },
     { name: '关于', path: '/about' },
   ],
 }
@@ -41,5 +42,5 @@ export const CommentConfig = {
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.8.2',
+  THEME_VERSION: '0.8.9',
 }

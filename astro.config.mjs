@@ -4,13 +4,13 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import remarkBreaks from 'remark-breaks';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
+import { SiteConfig } from './src/config.ts';
 
 export default defineConfig({
-  markdown: {
-
+    site: SiteConfig.siteUrl,
+    markdown: {
     remarkPlugins: [
       remarkBreaks,
-
     ],
     gfm: true,
   },

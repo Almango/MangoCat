@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.14",
     "@expressive-code/plugin-line-numbers": "^0.41.3",
     "@tailwindcss/vite": "^4.1.17",
     "animate.css": "^4.1.1",
@@ -16,9 +17,7 @@
     "astro-expressive-code": "^0.41.3",
     "astro-icon": "^1.1.5",
     "astro-theme-toggle": "^0.8.0",
-    "astro-tips": "^1.4.2",
     "mangocat": "link:",
-    "mdast-util-to-string": "^4.0.0",
     "rehype-stringify": "^10.0.1",
     "remark-rehype": "^11.1.2",
     "tailwindcss": "^4.1.17",

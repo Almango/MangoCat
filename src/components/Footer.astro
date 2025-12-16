@@ -3,126 +3,140 @@ import { SiteConfig, DEVELOPER_CONFIG } from "../config";
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="footer-content">
-    <!-- 技术支持区域 -->
-    <div class="footer-section powered-section">
-        <p class="powered-by">
-            Powered by <a href="https://astro.build/" target="_blank">Astro</a> &
-            <a href="https://github.com/Almango/MangoCat" target="_blank"
-                >MangoCat {DEVELOPER_CONFIG.THEME_VERSION}</a
-            >
-        </p>
-    </div>
+<footer class="footer">
+    <div class="footer-container">
 
-    <!-- 版权信息区域 -->
-    <div class="footer-section copyright-section">
-        <div class="copyright">
-            <span class="copyright-left"
-                ><span style="font-weight: bold;font-size: 1.2em;">&copy;</span>
-                {new Date().getFullYear()}
-                <span style="font-weight: bold;">{SiteConfig.author}</span> 保留权利.</span
-            >
-        </div>
-    </div>
-
-    <!-- 备案信息区域 -->
-    <div class="footer-section icp-section">
-        <div class="icp-info">
-            <a href="https://icp.gov.moe/?keyword=20240146" target="_blank">萌ICP备20240146号</a>
-            <div class="icp-icons">
-                <!-- 常用社交媒体和联系图标 -->
-                <a href={SiteConfig.siteUrl + "/rss.xml"} target="_blank" class="rss-icon">
-                    <Icon name="mdi:rss" class="social-icon" title="RSS" />
-                </a>
-                <a href="#" target="_blank" class="email-icon">
-                    <Icon name="mdi:email" class="social-icon" title="邮箱" />
-                </a>
-                <a href={"https://github.com/Almango/MangoCat"} target="_blank" class="github-icon">
-                    <Icon name="mdi:github" class="social-icon" title="GitHub" />
+        
+        <!-- 主要信息区 -->
+        <div class="footer-info">
+            <!-- 版权信息 -->
+            <div class="copyright">
+                <span style="font-weight: bold; font-size: 1.1em;">&copy;</span>
+                {new Date().getFullYear()} {SiteConfig.author}
+            </div>
+            
+            <!-- 技术支持 -->
+            <div class="powered">
+                Powered by <a href="https://astro.build/" target="_blank">Astro</a> &
+                <a href="https://github.com/Almango/MangoCat" target="_blank">MangoCat</a>
+                <span class="version">v{DEVELOPER_CONFIG.THEME_VERSION}</span>
+            </div>
+            
+            <!-- 备案信息 -->
+            <div class="icp">
+                <a href="https://icp.gov.moe/?keyword=20240146" target="_blank">萌ICP备20240146号</a>
+            </div>
+            <div class="rss">
+                <a href={SiteConfig.siteUrl + "/rss.xml"} target="_blank">
+                    RSS订阅
                 </a>
             </div>
         </div>
     </div>
-</div>
+</footer>
 
 <style>
-    @media (max-width: 768px) {
-        .footer {
-            padding: 0 20px;
-        }
+    .footer {
+        border-top: 1px solid var(--border-color);
+        color: var(--footer-color);
+        padding: 2rem 0;
+        margin-top: 4rem;
     }
-    .footer-content {
-        border-top: 1px dashed var(--border-color);
-        color: var(--text-color);
-        gap: 10px;
-        align-items: center;
-        padding: 20px 0 10px;
-        margin-top: 40px;
-        /* margin: 0 auto */
+    
+    .footer-container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        text-align: center;
     }
-
-    .powered-by {
-        font-size: 1em;
-        margin: 0;
-        padding-bottom: 2px;
-    }
-
-    .copyright {
-        font-size: 0.8em;
-        margin: 0;
+    
+    .footer-info {
         display: flex;
-        justify-content: space-between;
-        width: 100%;
-        color: var(--text-color);
-        padding-bottom: 2px;
-    }
-    .copyright-right {
-        display: flex;
+        justify-content: center;
         align-items: center;
-        gap: 8px; /* 控制图标之间的间距 */
+        gap: 1rem;
+        flex-wrap: wrap;
     }
-
-    /* 新的社交图标样式 */
-    .social-icon {
-        width: 24px; /* 增大图标尺寸 */
-        height: 24px;
-        color: var(--text-color);
-        fill: var(--text-color);
-        transition: all 0.3s ease;
+    
+    /* 统一footer-info内所有元素的字体样式（a标签除外） */
+    .footer-info > div,
+    .footer-info > span,
+    .footer-info .version {
+        font-family: 'AlimamaFangYuanTi', 'Satoshi', system-ui, sans-serif;
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--footer-color);
         opacity: 0.8;
-        padding: 4px;
-        border-radius: 6px;
+        margin: 0;
+        letter-spacing: 0.01em;
+        line-height: 1.5;
     }
-
-    .social-icon:hover {
-        color: var(--theme-color);
-        fill: var(--theme-color);
-        opacity: 1;
-        background-color: var(--hover-color);
+    
+    .footer-info .separator {
+        opacity: 0.5;
     }
-
-
-    .icp-info {
-        font-size: 0.8em;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    .icp-icons {
-        display: flex;
-        gap: 5px; /* 图标之间的间距 */
-    }
-
+    
     a {
-        color: var(--text-color);
+        font-family: 'AlimamaFangYuanTi', 'Satoshi', system-ui, sans-serif;
+        color: var(--footer-color);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: all 0.2s ease;
         font-weight: 500;
     }
-
+    
     a:hover {
         color: var(--theme-color);
+        opacity: 1;
+    }
+    
+    /* 响应式字体调整 */
+    @media (max-width: 768px) {
+        .copyright, .powered, .icp {
+            font-size: 0.8125rem;
+            letter-spacing: 0.01em;
+        }
+        
+        .separator {
+            font-size: 0.8125rem;
+        }
+        
+        .version {
+            font-size: 0.7rem;
+        }
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .footer {
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            padding: 0 1rem;
+        }
+        
+        .social-icons {
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .social-icon {
+            width: 2rem;
+            height: 2rem;
+        }
+        
+        .social-icon svg {
+            width: 1.125rem;
+            height: 1.125rem;
+        }
+        
+        .footer-info {
+            gap: 0.5rem;
+        }
+        
+        .copyright, .powered, .icp {
+            font-size: 0.8125rem;
+        }
     }
 </style>

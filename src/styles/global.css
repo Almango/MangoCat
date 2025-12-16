@@ -5,16 +5,18 @@
 :root {
     --theme-color: #1b6cd6ff;
     --bg-color: #f8f9fa;
-    --title-color: #151515;
-    --text-color: #0d0d0d;
+    --title-color: #202020;
+    --desc-color: #252525;
+    --text-color: #202020;
     --card-bg: #fff;
     --header-footer-bg-color: #fafbfc;
-    --border-color: #cecece;
+    --footer-color: #838383;
+    --border-color: #dadada;
     --grid-line-color: #eeeeee;
     /* 专门用于背景网格的颜色 */
     --hover-color: #eeeeee;
     --shadow-color: rgba(0, 0, 0, 0.05);
-    --info-bg-color: #ececec;
+    --info-bg-color: #f3f3f3;
     --info-font-color: #666666;
     --code-bg-color: #f5f5f5;
     --blockquote-bg-color: #f0f0f0;
@@ -23,16 +25,20 @@
     --code-shadow-color: rgba(0, 0, 0, 0.02);
     --code-border-shadow-color: rgba(27, 31, 35, 0.15);
     --box-synchronism-padding: 0 20px;
+    --width: 800px;
 }
+
 
 
 /* 定义暗色主题的CSS变量 */
 :root.dark {
     --bg-color: hsl(223, 14%, 10%);
     --title-color: #d9d9d9;
+    --desc-color: #999999;
     --text-color: #c9c9c9;
     --card-bg: hsl(225, 13%, 12%);
     --header-footer-bg-color: var(--bg-color);
+    --footer-color: #999999;
     --border-color: #444;
     --grid-line-color: hsl(223, 10%, 13%);
     /* 专门用于背景网格的颜色 */
@@ -52,7 +58,7 @@
 @font-face {
     font-family: 'Satoshi';
     src: url('/src/assets/fonts/font-satoshi-500-norma.woff2') format('woff2');
-    font-weight: 500;
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
@@ -110,152 +116,7 @@ body {
 }
 
 
-/* Header 样式 */
-.header {
-    background-color: var(--header-footer-bg-color);
-    padding: 15px 20px;
-    margin: 0 auto;
-    box-shadow: 0 1px 3px var(--shadow-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    width: 100%;
-    box-sizing: border-box;
-}
 
-.header h1 {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-color);
-    margin: 0;
-}
-
-/* 导航容器 */
-.nav-container {
-    margin-left: auto;
-    margin-right: 20px;
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 15px;
-    transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
-    color: var(--theme-color);
-}
-
-/* 移动端导航切换按钮 */
-.header-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-}
-
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    box-shadow: var(--shadow-color) 0px 1px 3px 0px, var(--shadow-color) 0px 0px 0px 1px;
-    background-color: transparent;
-    border-radius: 8px;
-    padding: 6px;
-    color: var(--text-color);
-    font-size: 18px;
-    cursor: pointer;
-    line-height: 1;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-toggle:hover {
-    background-color: var(--hover-color);
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .nav-toggle {
-        display: flex;
-    }
-
-    .nav-container {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        background-color: var(--header-footer-bg-color);
-        box-shadow: 0 3px 5px var(--shadow-color);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        margin-right: 0;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    .nav-container.nav-open {
-        max-height: 200px;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        padding: 15px 20px;
-        gap: 15px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .nav-links li {
-        width: 100%;
-    }
-
-    .nav-links li a {
-        font-size: 16px;
-        width: 100%;
-        display: block;
-        padding: 5px 0;
-    }
-}
-
-.nav-links li a:hover {
-    color: #007bff;
-}
-
-.theme-toggle {
-    box-shadow: var(--shadow-color) 0px 1px 3px 0px, var(--shadow-color) 0px 0px 0px 1px;
-    background-color: transparent;
-    border-radius: 8px;
-    padding: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-.theme-toggle:hover {
-    background-color: var(--hover-color);
-    color: var(--text-color);
-}
 
 /* PostList 样式 */
 .post-card {
@@ -269,17 +130,13 @@ body {
     display: block;
     text-decoration: none;
     color: var(--text-color);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .post-card:hover {
     border-color: var(--theme-color);
-}
-
-.post-card:hover .post-info .tag,
-.post-card:hover .post-info .category,
-.post-card:hover .post-info .word-count {
-border: 2px dashed var(--border-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .post-content {
@@ -289,13 +146,9 @@ border: 2px dashed var(--border-color);
 
 }
 
-.post-title {
-    margin-bottom: 0.5rem;
-}
-
 .post-title h2 {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: bold;
     color: var(--title-color);
     margin: 0;
     line-height: 1.3;
@@ -303,37 +156,38 @@ border: 2px dashed var(--border-color);
 
 .post-desc p {
     font-size: 15px;
-    color: var(--text-color);
-    font-weight: 500;
+    color: var(--desc-color);
     margin: 0;
     line-height: 1.6;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* 限制3行 */
+    overflow: hidden;       /* 隐藏超出部分 */
 }
 
 .post-info {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 12px;
     color: var(--info-font-color);
     align-items: center;
-    margin-top: 10px;
 }
 
 .post-info .tag,
 .post-info .category,
 .post-info .word-count {
     background-color: var(--info-bg-color);
-    padding: 5px 10px;
+    padding: 2px 5px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 5px;
     white-space: nowrap;
     border: 2px solid var(--card-bg);
-
 }
-
+.post-info .category{font-weight: bold;}
 /* 全局图标样式，确保与文字对齐 */
 .post-info .category svg {
     width: 16px;
@@ -423,10 +277,6 @@ border: 2px dashed var(--border-color);
     margin-bottom: 1px;
 }
 
-.article-meta span:nth-child(2) {
-    color: #2ea085;
-}
-
 /* 文章内容样式由 markdown.css 接管 */
 
 /* 分页导航样式 */
@@ -455,10 +305,6 @@ border: 2px dashed var(--border-color);
     transition: all 0.3s ease;
 }
 
-.pagination-info:hover {
-    background-color: var(--hover-color);
-    box-shadow: var(--shadow-color) 0 2px 4px;
-}
 
 .pagination-buttons {
     display: flex;
@@ -481,10 +327,7 @@ border: 2px dashed var(--border-color);
 }
 
 .pagination-btn:hover {
-    background-color: var(--hover-color);
-    color: var(--text-color);
-    box-shadow: var(--shadow-color) 0 2px 4px;
-    transform: translateY(-1px);
+    border-color: var(--theme-color);
 }
 
 /* 页脚样式 */

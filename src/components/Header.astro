@@ -7,27 +7,29 @@ const { NavConfig } = SiteConfig;
 ---
 
 <header class="header">
-    <a href="/" class="logo"><h1>{SiteConfig.title}</h1></a>
-    
-    <nav class="nav-container">
-        <ul class="nav-links">
-            {NavConfig.map((navItem) => (
-                <li key={navItem.path}>
-                    <a href={navItem.path}>{navItem.name}</a>
-                </li>
-            ))}
-        </ul>
-    </nav>
-    
-    <!-- 右侧按钮组：主题切换和导航折叠 -->
-    <div class="header-buttons">
-        <ThemeScript />
-        <Toggle class="theme-toggle" style={{ width: "30px", height: "30px" }} />
+    <div class="container">
+        <a href="/" class="logo"><h1>{SiteConfig.title}</h1></a>
         
-        <!-- 移动端导航折叠按钮 -->
-        <button class="nav-toggle" aria-label="打开导航">
-            <Icon name="material-symbols:menu-rounded" />
-        </button>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                {NavConfig.map((navItem) => (
+                    <li key={navItem.path}>
+                        <a href={navItem.path}>{navItem.name}</a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+        
+        <!-- 右侧按钮组：主题切换和导航折叠 -->
+        <div class="header-buttons">
+            <ThemeScript />
+            <Toggle class="theme-toggle" style={{ width: "30px", height: "30px" }} />
+            
+            <!-- 移动端导航折叠按钮 -->
+            <button class="nav-toggle" aria-label="打开导航">
+                <Icon name="material-symbols:menu-rounded" />
+            </button>
+        </div>
     </div>
     
     <script>
@@ -39,4 +41,161 @@ const { NavConfig } = SiteConfig;
             navContainer?.classList.toggle('nav-open');
         });
     </script>
+
+    <style>
+        .header {
+            background-color: var(--header-footer-bg-color);
+            padding: 15px 0;
+            box-shadow: 0 1px 3px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            box-sizing: border-box;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        /* 导航容器 */
+        .nav-container {
+            margin-left: auto;
+            margin-right: 20px;
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: var(--theme-color);
+        }
+
+        /* 移动端导航切换按钮 */
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            border-radius: 8px;
+            padding: 6px;
+            color: var(--text-color);
+            font-size: 18px;
+            cursor: pointer;
+            line-height: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-toggle:hover {
+            background-color: var(--hover-color);
+        }
+
+        .theme-toggle {
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            border-radius: 8px;
+            padding: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--hover-color);
+            color: var(--text-color);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-container {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                background-color: var(--header-footer-bg-color);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                margin-right: 0;
+                flex-direction: column;
+                justify-content: flex-start;
+                box-shadow: 0 3px 5px var(--shadow-color);
+            }
+
+            .nav-container.nav-open {
+                max-height: 200px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links li a {
+                font-size: 16px;
+                width: 100%;
+                display: block;
+                padding: 5px 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
 </header>

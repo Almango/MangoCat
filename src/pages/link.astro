@@ -3,14 +3,9 @@ import { SiteConfig } from '../config.ts';
 import Layout from '../layouts/Layout.astro';
 import { Icon } from "astro-icon/components";
 import Comment from '../components/Comment.astro';
+import LinkPage  from '../content/link.md';
 // 友链数据，直接集成在页面中
 const links = [
-  {
-		name: "松坂希奈子",
-		description: "这个世界很大❤",
-		url: "https://blog.mysqil.com/",
-		avatar: "https://blog.mysqil.com/_astro/avatar.D239-k4C_ZU0B2r.webp",
-	},
 	{
 		name: "张洪Heo",
 		description: "分享设计与科技生活",
@@ -65,12 +60,6 @@ const links = [
 		description: "努力吃上更贵的雪糕！",
 		url: "https://www.hydsb0.com",
 		avatar: "https://s21.ax1x.com/2025/07/13/pVlsr8S.jpg",
-	},
-	{
-		name: "李小白",
-		description: "风共舞，随心而行",
-		url: "https://blog.lxb.icu/",
-		avatar: "https://q1.qlogo.cn/g?b=qq&nk=648226460&s=640",
 	},
 	{
 		name: "清欲の小窝",
@@ -141,7 +130,7 @@ const links = [
 <Layout pagetitle={`友链 - ${SiteConfig.title}`}>
   <div class="links-container">
     <h1 class="text-3xl font-bold" style="color: var(--title-color);">友链</h1>
-    <p class="links-subtitle">与我连接的朋友们</p>
+    <p class="links-subtitle">共同进步</p>
     
     <div class="links-grid">
       {links.map((link, index) => (
@@ -161,7 +150,7 @@ const links = [
         </div>
       ))}
     </div>
-    
+    <LinkPage />
     <!-- 评论区 -->
     <Comment />
   </div>
@@ -191,11 +180,13 @@ const links = [
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
   }
   
   .link-card:hover {
     border-color: var(--theme-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
   }
   
   .link-card-inner {

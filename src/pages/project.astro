@@ -1,0 +1,192 @@
+---
+import { SiteConfig } from '../config.ts';
+import Layout from '../layouts/Layout.astro';
+import { Icon } from "astro-icon/components";
+
+// 项目数据
+const projects = [
+  {    name: "MangoCat",    description: "基于 Astro 框架开发的个人博客主题项目，以简洁、现代的设计风格重构博客体验。(项目开发中)",    demoUrl: "https://blog.almango.cn/",    githubUrl: "https://github.com/Almango/MangoCat",    tags: ["Astro", "博客", "主题"]  },
+
+  {
+    name: "SimulateMoki-sjzxd",
+    description: "基于Html + JS实现的一款三角洲行动烽火地带的网页版摸金模拟器，专注于还原游戏中的核心摸金体验。",
+    demoUrl: "https://moki.almango.cn/",
+    githubUrl: "https://github.com/Almango/SimulateMoki-sjzxd",
+    tags: ["HTML", "JS", "游戏"]
+  },
+];
+
+---
+
+<Layout pagetitle={`项目 - ${SiteConfig.title}`}>
+  <div class="projects-container">
+    <h1 class="text-3xl font-bold" style="color: var(--title-color);">项目</h1>
+    <p class="projects-subtitle">我的开源项目</p>
+
+    <div class="projects-grid">
+      {projects.map((project, index) => (
+        <div class="project-card animate-slide-in" style={{ animationDelay: `${index * 0.1}s` }} data-key={project.name}>
+          <div class="project-header">
+            <h2 class="project-name">{project.name}</h2>
+          </div>
+          
+          <p class="project-description">{project.description}</p>
+          
+          {project.tags && project.tags.length > 0 && (
+            <div class="project-tags">
+              {project.tags.map((tag) => (
+                <span class="tag" key={tag}>{tag}</span>
+              ))}
+            </div>
+          )}
+          
+          <div class="project-links">
+            {project.demoUrl && (
+              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="project-link demo-link">
+                <Icon name="mdi:eye-outline" class="link-icon" /> 示例网站
+              </a>
+            )}
+            {project.githubUrl && (
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link github-link">
+                <Icon name="mdi:github" class="link-icon" /> 仓库
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .projects-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .projects-subtitle {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 30px;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .project-card:hover {
+    border-color: var(--theme-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+  
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  
+  .project-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin: 0;
+    line-height: 1.3;
+  }
+  
+
+  
+  .project-description {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .tag {
+    font-size: 0.75rem;
+    background-color: var(--hover-color);
+    color: var(--text-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .project-links {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .project-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--theme-color);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-color);
+  }
+  
+  .project-link:hover {
+    background-color: var(--hover-color);
+    border-color: var(--theme-color);
+  }
+  
+  .link-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .project-card {
+      padding: 16px;
+    }
+    
+    .project-name {
+      font-size: 1.1rem;
+    }
+    
+    .project-stats {
+      font-size: 0.8rem;
+    }
+    
+    .project-description {
+      font-size: 0.85rem;
+    }
+    
+    .project-links {
+      flex-direction: column;
+    }
+    
+    .project-link {
+      justify-content: center;
+    }
+  }
+</style>
