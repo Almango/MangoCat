@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
     "@expressive-code/plugin-line-numbers": "^0.41.3",
+    "@iconify-json/simple-icons": "^1.2.63",
     "@tailwindcss/vite": "^4.1.17",
     "animate.css": "^4.1.1",
     "astro": "^5.16.4",

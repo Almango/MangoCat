@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 /* @import 'simple-tips/index.css'; */
 /* 定义亮色主题的CSS变量 */
 :root {
@@ -25,7 +24,7 @@
     --code-shadow-color: rgba(0, 0, 0, 0.02);
     --code-border-shadow-color: rgba(27, 31, 35, 0.15);
     --box-synchronism-padding: 0 20px;
-    --width: 800px;
+    --width: 750px;
 }
 
 
@@ -108,7 +107,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 700px;
+    max-width: var(--width);
     padding: 0;
     box-sizing: border-box;
     margin: 0 auto;
@@ -215,7 +214,7 @@ body {
 
 /* 文章详情页样式 */
 .article-container {
-    max-width: 700px;
+    max-width: var(--width);
     margin: 30px auto;
     padding: 0;
     box-sizing: border-box;
@@ -286,7 +285,7 @@ body {
     align-items: center;
     margin: 40px auto;
     gap: 20px;
-    max-width: 700px;
+    max-width: var(--width);
     padding: 0;
     box-sizing: border-box;
 }
@@ -335,7 +334,7 @@ body {
     color: var(--text-color);
     padding: 20px 0 10px;
     border-top: 2px dashed var(--info-font-color);
-    max-width: 700px;
+    max-width: var(--width);
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
