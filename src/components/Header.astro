@@ -13,7 +13,7 @@ const { NavConfig } = SiteConfig;
         <nav class="nav-container">
             <ul class="nav-links">
                 {NavConfig.map((navItem) => (
-                    <li key={navItem.path}>
+                    <li>
                         <a href={navItem.path}>{navItem.name}</a>
                     </li>
                 ))}

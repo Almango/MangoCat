@@ -9,9 +9,7 @@ import { SiteConfig } from './src/config.ts';
 export default defineConfig({
     site: SiteConfig.siteUrl,
     markdown: {
-    remarkPlugins: [
-      remarkBreaks,
-    ],
+    remarkPlugins: [remarkBreaks,],
     gfm: true,
   },
   integrations: [

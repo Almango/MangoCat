@@ -9,7 +9,7 @@
     --text-color: #202020;
     --card-bg: #fff;
     --header-footer-bg-color: #fafbfc;
-    --footer-color: #838383;
+    --footer-color: #6b7280;
     --border-color: #dadada;
     --grid-line-color: #eeeeee;
     /* 专门用于背景网格的颜色 */
@@ -37,7 +37,7 @@
     --text-color: #c9c9c9;
     --card-bg: hsl(225, 13%, 12%);
     --header-footer-bg-color: var(--bg-color);
-    --footer-color: #999999;
+    --footer-color: #a1a1aa;
     --border-color: #444;
     --grid-line-color: hsl(223, 10%, 13%);
     /* 专门用于背景网格的颜色 */
@@ -121,7 +121,7 @@ body {
 .post-card {
     background-color: var(--card-bg);
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     transition: background-color 0.2s ease;
@@ -242,8 +242,16 @@ body {
     font-size: 1.8em;
     font-weight: 700;
     color: var(--title-color);
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     line-height: 1.2;
+}
+
+.article-description {
+    font-size: 15px;
+    color: var(--text-color);
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+    opacity: 0.8;
 }
 
 .article-meta {
@@ -418,7 +426,6 @@ body {
 
     .post-card {
         padding: 15px;
-        margin-bottom: 15px;
     }
 
     .post-title h2 {

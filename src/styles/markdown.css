@@ -178,6 +178,7 @@
 .article-content pre code {
     background-color: transparent;
     padding: 0;
+    
     border-radius: 0;
     font-family: 'SFMono-Regular', 'Consolas', 'Monaco', 'Courier New', monospace;
     white-space: pre;
@@ -292,7 +293,7 @@
 }
 .expressive-code .frame {
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px !important;
-    
+
 }
 
 /* 自定义 expressive-code 行内代码样式 */
@@ -300,6 +301,7 @@
     border: none !important;
     background: none !important;
     box-shadow: none !important;
+    
     padding: 0 !important;
 }
 

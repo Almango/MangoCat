@@ -1,5 +1,5 @@
 ---
-title: Astro-MangoCat主题开发日志
+title: Astro MangoCat主题开发日志
 description: 这是一个从零开始开发的Astro博客主题，用于展示我的学习笔记和技术分享。
 published: 2025-12-06 16:27:41
 tags: [C++, 数据结构]                               # 添加分类
@@ -7,7 +7,28 @@ category: 学习笔记
 slug: "83x33k23"
 ---
 
-**写一个主题，CSS写成屎山了😠😠😠**
+[[toc]]
+
+
+关于这个项目是怎么写出来的，其实是用AI手搓出来的，AI负责写功能，我负责写样式。
+样式当然也不是凭空想出来的，而是借鉴一些主题项目，例如：
+- **主页文章列表**借鉴了：[Pure](https://astro-pure.js.org/blog)
+- **导航栏与主页头像设计**借鉴了：[吐司气泡](https://blog.toastbubble.top/)
+- **分类、归档页和文章格式**借鉴的是：[纸鹿摸鱼处](https://blog.zhilu.site/archive)
+......
+
+
+1. 虽然最终的样式是朝着我的预期方向发展的，但是在这个过程中也有很多问题不断堆积了下来，首先是markdown的样式格式，这个完完全全是手搓的，很多地方并不完美，我很希望有个插件能一次性解决这个问题，而不是需要什么样式就直接往markdown.css中写，代码就会越写越💩，其次是CSS堆积，因为我并没有使用原子样式TailWindCSS，用于约束布局和格式的样式都会写在global.css中，而单页面的专属样式则直接写在单页面组件中，虽然改是很好改，但是代码太多了...这是让我困扰的一点，这些问题往往会模糊我对项目整个结构的理解（可恶！写一个主题，CSS写成屎山了😠😠😠）
+
+2. 不过在后续的开发中，我会不断对其进行优化，同时也会整理出整个项目实现结构...
+
+
+3. 基于简洁的理念，我删除了很多实际浏览时几乎用不到的功能，比如：
+- **多选项翻页功能**：我仅提供了翻页和显示总页数的功能，我个人认为翻第三页，第四页几乎用不到，还有一次性翻到最后一页的功能也用不到，如果要进行精准翻页，直接在URL中输入页码即可。
+- **标签页**：我认为分类的权重更高，直接使用分类会更方便，当然了，我现在是这么认为的，后续可能会考虑添加标签页功能。
+- **文章封面**：虽然我考虑过添加文章封面功能，但我目前还没有一个稳定的图床...
+
+
 
 ### CSS关键类
 `.container`：通用容器，用于包裹页面的内容（格式化内容布局）。
@@ -18,35 +39,9 @@ slug: "83x33k23"
 >
 
 
-## 框架结构
 
-### 一、项目结构
-```
-src/
-├── content/          # 博客文章和内容文件
-│   ├── posts/        # Markdown格式的博客文章
-│   ├── about.md      # 关于页面内容
-│   ├── link.md       # 友链页面内容
-│   └── config.ts     # 内容配置
-├── layouts/          # 布局组件
-│   └── Layout.astro  # 主布局组件
-├── components/       # 可复用组件
-│   ├── Header.astro  # 导航栏组件
-│   ├── Footer.astro  # 页脚组件
-│   ├── Postlist.astro # 文章列表组件
-│   └── Container.astro # 内容容器组件
-├── pages/            # 页面入口
-│   ├── index.astro   # 首页
-│   ├── about.astro   # 关于页面
-│   └── posts/        # 文章详情页
-├── styles/           # 样式文件
-├── utils/            # 工具函数
-│   ├── Readtime-Wordcount.ts # 字数统计和阅读时间计算
-│   └── types.ts      # TypeScript接口定义
-└── config.ts         # 站点配置
-```
 
-#### 布局组件
+### 布局组件
 1. layouts目录用于存放布局组件的目录，它作为一个<html><body></body></html>的容器，用于包裹页面的内容。
 ```astro
 ---
@@ -87,7 +82,7 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 ```
 
-## 共享组件
+### 共享组件
 
 > 在 Astro 中，`Layouts` 目录（通常是 src/layouts）是一个专门用来存放布局组件的目录。布局组件是 Astro 中一种特殊的组件，它们定义了你的网站页面的通用结构和样式，比如 HTML 结构、头部、尾部、导航栏等等。
 
@@ -256,6 +251,65 @@ import 'animate.css';
 
 ## 代码块配色与功能
 
+文章中的代码块使用的是expressive-code插件，它提供了丰富的代码块样式和功能，比如语法高亮、行号显示、复制按钮等。
+
+1. 为Astro安装[expressive-code](https://expressive-code.com/)插件
+
+```bash
+npm astro add astro-expressive-code
+```
+2. 在`astro.config.mjs`中引入expressive-code插件。
+
+```js title="astro.config.mjs"
+import { defineConfig } from 'astro/config';
+import expressiveCode from 'astro-expressive-code';
+
+export default defineConfig({
+  integrations: [
+    expressiveCode({
+      // 配置选项
+    }),
+  ],
+});
+```
+3. 这样，所有的代码块就会自动应用expressive-code插件的样式和功能。
+4. 另外，如果只是安装了expressive-code还是不够的，它没法显示行号，我们需要额外安装`@expressive-code/plugin-line-numbers`插件。
+5. expressive-code还提供了很多主题，我们可以在官网选择一个喜欢的主题，然后在`astro.config.mjs`中配置expressive-code插件，添加`theme`选项。
+```js title="astro.config.mjs"
+import { defineConfig } from 'astro/config';
+import expressiveCode from 'astro-expressive-code';
+
+export default defineConfig({
+  integrations: [
+    expressiveCode({
+      theme: 'github-dark',
+      plugins: [pluginLineNumbers(),],
+    }),
+  ],
+});
+```
+
+```bash
+npm i @expressive-code/plugin-line-numbers
+```
+5. 安装完成后，在`astro.config.mjs`中配置expressive-code插件，添加`lineNumbers`插件。
+
+
+```js title="astro.config.mjs"
+import { defineConfig } from 'astro/config';
+import expressiveCode from 'astro-expressive-code';
+import lineNumbers from '@expressive-code/plugin-line-numbers';
+
+export default defineConfig({
+  integrations: [
+    expressiveCode({
+      plugins: [lineNumbers],
+    }),
+  ],
+});
+```
+6. 这样，所有的代码块就会自动显示行号了。
+
 
 
 ## 主题切换功能
@@ -288,9 +342,293 @@ import { Toggle } from "astro-theme-toggle/components";
 ```
 4. 该插件甚至不用配置图标，自带两个明暗图标，另外它缺少一个跟随系统主题的功能，不过这也不是问题，因为系统主题切换时，会自动触发主题切换动画。
 
+## 过渡动画
+
+1. 使用的是CSS编写的原生过渡动画。
+2. 在`src/styles/global.css`中定义了`slide-in`动画，该动画可以适配给所有需要滑动入效果的元素，比如文章列表、文章、友链等。
+3. 使用方法：只需为需要添加滑动入效果的元素添加`animate-slide-in`类即可。
+```css
+/* 定义slide-in动画 */
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 应用slide-in动画的类 */
+.animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+    opacity: 0;
+    /* 初始状态为透明 */
+}
+```
+4. 例如，为文章内容添加滑动入效果：
+
+```astro
+<!-- 为文章内容添加动画 -->
+<div class="article-content animate-slide-in">
+	 <Content/>
+</div>
+```
+
+
+## 评论系统
+1. 评论系统使用的是Twikoo，它是一个基于云函数的评论系统，支持多种前端框架，比如Vue、React等。
+2. 提前配置好Twikoo的环境变量，包括环境ID、区域、数据库等...
+3. 我们在`src/components/Comment.astro`中引入Twikoo组件，配置好环境变量，即可在博客文章中添加评论功能。
+
+```astro
+---
+import { CommentConfig } from '../config';
+
+const envId = CommentConfig.twikoo.envId;
+const path = CommentConfig.twikoo.path;
+---
+
+<div class="mt-8">
+  <h2 class="mb-4 text-lg font-medium text-[var(--title-color)] dark:text-[var(--title-color)]">评论</h2>
+  <div 
+    id="tcomment" 
+    class="twikoo-container rounded-lg border-zinc-200 p-4 dark:border-zinc-700"
+    data-env-id={envId}
+    data-path={path || 'auto'}
+  >
+    <div class="flex items-center justify-center py-8 text-zinc-500 dark:text-zinc-400">
+      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mr-2"></div>
+      正在加载评论...
+    </div>
+  </div>
+</div>
+
+<!-- 使用 defer 属性延迟执行，确保 DOM 就绪 -->
+<script 
+  src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js"
+  defer
+></script>
+
+<!-- 内联脚本处理初始化 -->
+<script is:inline>
+  // 全局变量存储重试次数
+  window.twikooRetryCount = 0;
+  window.maxRetries = 20; // 最大重试次数
+
+  function waitForTwikoo(callback, retryCount = 0) {
+    if (typeof window.twikoo !== 'undefined') {
+      callback();
+    } else if (retryCount < window.maxRetries) {
+      setTimeout(() => waitForTwikoo(callback, retryCount + 1), 200);
+    } else {
+      console.error('Twikoo failed to load after maximum retries');
+      showErrorMessage();
+    }
+  }
+
+  function showErrorMessage() {
+    const containers = document.querySelectorAll('#tcomment');
+    containers.forEach(container => {
+      if (container) {
+        container.innerHTML = `
+          <div class="text-center py-8 text-red-500">
+            <p>评论系统加载失败</p>
+            <button onclick="location.reload()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+              重新加载
+            </button>
+          </div>
+        `;
+      }
+    });
+  }
+
+  function initializeTwikoo() {
+    const container = document.getElementById('tcomment');
+    
+    if (!container) {
+      console.warn('Twikoo container (#tcomment) not found');
+      return;
+    }
+
+    const envId = container.getAttribute('data-env-id');
+    const path = container.getAttribute('data-path');
+    
+    if (!envId) {
+      console.error('Twikoo envId not provided');
+      container.innerHTML = '<div class="text-center py-8 text-red-500">评论系统配置错误</div>';
+      return;
+    }
+
+    try {
+      // 清理容器
+      container.innerHTML = '';
+      
+      // 初始化 Twikoo
+      window.twikoo.init({
+        envId: envId,
+        el: '#tcomment',
+        path: path === 'auto' ? location.pathname : path,
+        lang: 'zh-CN'
+      });
+      
+      console.log('Twikoo initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize Twikoo:', error);
+      container.innerHTML = `
+        <div class="text-center py-8 text-red-500">
+          <p>评论系统初始化失败</p>
+          <p class="text-sm mt-1">${error.message}</p>
+          <button onclick="location.reload()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+            重新加载
+          </button>
+        </div>
+      `;
+    }
+  }
+
+  function handlePageInit() {
+    // 重置重试计数
+    window.twikooRetryCount = 0;
+    
+    // 等待 Twikoo 脚本加载完成后初始化
+    waitForTwikoo(initializeTwikoo);
+  }
+
+  // 首次加载处理
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handlePageInit);
+  } else {
+    // DOM 已经准备就绪，延迟一点执行以确保所有脚本都加载完成
+    setTimeout(handlePageInit, 100);
+  }
+
+  // Astro ViewTransitions 支持
+  document.addEventListener('astro:after-swap', () => {
+    console.log('Page swapped, reinitializing Twikoo');
+    setTimeout(handlePageInit, 150);
+  });
+
+  // 页面可见性变化处理（可选）
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      const container = document.getElementById('tcomment');
+      if (container && container.children.length === 0) {
+        console.log('Page became visible, checking Twikoo');
+        setTimeout(handlePageInit, 100);
+      }
+    }
+  });
+</script>
+
+<style is:global>
+  .twikoo-container {
+    font-family: inherit;
+    min-height: 200px;
+  }
+  
+  .dark .twikoo-container {
+    background-color: transparent;
+  }
+  
+  /* 输入框样式 */
+  .dark .tk-content textarea,
+  .dark .tk-input input {
+    background-color: rgb(39 39 42) !important;
+    border-color: rgb(63 63 70) !important;
+    color: rgb(228 228 231) !important;
+  }
+  
+  .dark .tk-content textarea:focus,
+  .dark .tk-input input:focus {
+    border-color: rgb(96 165 250) !important;
+  }
+  
+  /* 按钮样式 */
+  .dark .tk-submit {
+    border-color: rgb(63 63 70) !important;
+    color: rgb(228 228 231) !important;
+  }
+  
+
+  
+  /* 评论区域样式 */
+  .dark .tk-comment,
+  .dark .tk-replies-wrap {
+    background-color: transparent !important;
+    border-color: rgb(63 63 70) !important;
+  }
+  
+  .dark .tk-comment .tk-main {
+    color: rgb(228 228 231) !important;
+  }
+  
+  .dark .tk-comment .tk-meta span {
+    color: rgb(161 161 170) !important;
+  }
+  
+  /* 链接样式 */
+  .dark .tk-comment a {
+    color: rgb(96 165 250) !important;
+  }
+  
+  .dark .tk-comment a:hover {
+    color: rgb(147 197 253) !important;
+  }
+  
+  /* 表情包容器 */
+  .dark .tk-owo-container {
+    background-color: rgb(39 39 42) !important;
+    border-color: rgb(63 63 70) !important;
+  }
+  
+  /* 标签和额外信息 */
+  .dark .tk-tag,
+  .dark .tk-extras {
+    color: rgb(161 161 170) !important;
+  }
+  
+  /* 字体和边框圆角 */
+  .tk-comment,
+  .tk-content,
+  .tk-input {
+    font-family: 'Geist', system-ui, sans-serif !important;
+  }
+  
+  .tk-content textarea,
+  .tk-input input,
+  .tk-submit,
+  .tk-comment,
+  .tk-owo-container {
+    border-radius: 0.5rem !important;
+  }
+  
+  .tk-comment {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* 加载状态 */
+  .dark .tk-loading {
+    color: rgb(161 161 170) !important;
+  }
+  
+  /* 加载动画 */
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>
+```
+
 ## 博客完整实现原理
 
-### 1. 架构设计与核心技术
+### 架构设计与核心技术
 
 本博客主题基于Astro框架构建，采用了现代化的静态站点生成（SSG）架构。Astro的核心优势在于其组件系统的灵活性，允许开发者使用多种前端框架（React、Vue等）或直接使用原生HTML、CSS和JavaScript。
 
@@ -302,6 +640,32 @@ import { Toggle } from "astro-theme-toggle/components";
 - **Astro Icon**：图标系统，支持Material Symbols和其他图标库
 - **astro-theme-toggle**：主题切换插件，实现明暗模式
 
+### 项目结构
+
+```file
+src/
+├── content/          # 博客文章和内容文件
+│   ├── posts/        # Markdown格式的博客文章
+│   ├── about.md      # 关于页面内容
+│   ├── link.md       # 友链页面内容
+│   └── config.ts     # 内容配置
+├── layouts/          # 布局组件
+│   └── Layout.astro  # 主布局组件
+├── components/       # 可复用组件
+│   ├── Header.astro  # 导航栏组件
+│   ├── Footer.astro  # 页脚组件
+│   ├── Postlist.astro # 文章列表组件
+│   └── Container.astro # 内容容器组件
+├── pages/            # 页面入口
+│   ├── index.astro   # 首页
+│   ├── about.astro   # 关于页面
+│   └── posts/        # 文章详情页
+├── styles/           # 样式文件
+├── utils/            # 工具函数
+│   ├── Readtime-Wordcount.ts # 字数统计和阅读时间计算
+│   └── types.ts      # TypeScript接口定义
+└── config.ts         # 站点配置
+```
 
 
 ### 2. 配置系统
