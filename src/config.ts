@@ -42,5 +42,5 @@ export const CommentConfig = {
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.9.5',
+  THEME_VERSION: '0.9.4',
 }
