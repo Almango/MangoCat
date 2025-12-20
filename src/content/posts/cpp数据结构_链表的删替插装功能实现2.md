@@ -3,7 +3,7 @@ title: C++数据结构-单链表的删替插装功能实现2【7】
 description: C++指针与结构体的出生操作
 published: 2024-10-12 11:26:02
 tags: [C++, 数据结构]                             
-category: 学习笔记 
+category: 技能 
 slug: "97461e86"
 ---
 

@@ -3,7 +3,7 @@ title: C++数据结构-单链表的实例剖析与应用1【6】
 description: C++指针与结构体的出生操作
 published: 2024-10-05 12:45:21 #  字符串日期即可，不需要 ISO 格式
 tags: [C++, 数据结构] # 添加分类
-category: 学习笔记
+category: 技能
 slug: "79c36as4c"
 ---
 

@@ -11,11 +11,11 @@ export const SiteConfig: SiteConfigType = {
     POSTS_PER_PAGE: 6,    // 每页显示的文章数量
     },
   Categories: {
-    '随笔': { icon: 'material-symbols:edit-document-rounded', color: '#ec4f4fff' },
-    '感言': { icon: 'material-symbols:kid-star-outline', color: '#30afa7ff' },
+    '随笔': { icon: 'material-symbols:edit-document-rounded', color: '#007fc9ff' },
+    '感言': { icon: 'material-symbols:kid-star-outline', color: '#ffa600f3' },
     '日常': {icon: 'material-symbols:edit-note-rounded',color: '#c03f99ff'},
-    '学习笔记': {icon: 'material-symbols:code-rounded', color: '#36bd41ff'
-    }
+    '游戏': {icon: 'material-symbols:videogame-asset-outline',color: '#ec4f4fff'},
+    '技能': {icon: 'material-symbols:code-rounded', color: '#36bd41ff'}
   },
   NavConfig: [
     { name: '归档', path: '/archive' },
