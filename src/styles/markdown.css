@@ -8,116 +8,78 @@
 
 /* 标题样式 */
 .article-content h1 {
-    font-size: 1.6em;
+    font-size: 1.5em;
     font-weight: 700;
     color: var(--title-color);
-    margin: 1.5em 0 0.8em;
+    margin: 1.0em 0 0.4em;
     padding-bottom: 0.3em;
     border-bottom: 2px solid transparent;
     position: relative;
-    padding-left: 1.1em;
-}
-
-.article-content h1::before {
-    content: '+';
-    background-color: #3683f7;
-    border-radius: 5px;
-    padding: 0 2px;
-    position: absolute;
-    left: 0;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: inherit;
 }
 
 .article-content h2 {
-    font-size: 1.5em;
-    font-weight: 600;
-    color: var(--title-color);
-    margin: 1.3em 0 0.7em;
-    padding-bottom: 0.2em;
-    border-bottom: 1px solid transparent;
-    position: relative;
-    padding-left: 1.1em;
-}
-
-.article-content h2::before {
-    content: '#';
-    background-color: #3683f7;
-    border-radius: 6px;
-    padding: 0 2px;
-    position: absolute;
-    left: 0;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: inherit;
-}
-
-.article-content h3 {
     font-size: 1.3em;
     font-weight: 600;
     color: var(--title-color);
-    margin: 1.2em 0 0.6em;
+    margin: 0.9em 0 0.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 1px solid transparent;
     position: relative;
-    padding-left: 0.5em; /* 保持一致 */
 }
 
-.article-content h3::before {
-    content: ''; /* 移除空格内容，使用固定宽度 */
-    background-color: #3683f7;
-    border-radius: 6px;
-    width: 4px; /* 设置固定宽度，控制元素宽度 */
-    height: 1.3em; /* 设置与字体大小匹配的高度 */
-    position: absolute;
-    left: 0;
-    top: 5px;
-}
-
-
-.article-content h4 {
+.article-content h3 {
     font-size: 1.2em;
     font-weight: 600;
     color: var(--title-color);
-    margin: 1.1em 0 0.5em;
+    margin: 0.8em 0 0.3em;
+    position: relative;
+}
+
+.article-content h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--title-color);
+    margin: 0.7em 0 0.3em;
 }
 
 .article-content h5 {
     font-size: 1em;
     font-weight: 600;
     color: var(--title-color);
-    margin: 1em 0 0.4em;
+    margin: 0.6em 0 0.2em;
 }
 
 .article-content h6 {
-    font-size: 0.8em;
+    font-size: 0.9em;
     font-weight: 600;
     color: var(--title-color);
-    margin: 1em 0 0.4em;
+    margin: 0.6em 0 0.2em;
 }
 
 /* 段落样式 */
 .article-content p {
-    margin: 0 0 1.2em 0;
+    margin: 0 0 0.6em 0;
     text-align: justify;
 }
 
 /* 链接样式 */
 .article-content a {
-    color: #3498db;
+    color: var(--theme-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .article-content a:hover {
-    color: #2980b9;
+    color: var(--theme-color);
+    opacity: 0.8;
     text-decoration: underline;
 }
 
 /* 列表样式 */
 .article-content ul,
 .article-content ol {
-    margin: 0 0 1.2em 0.5em;
-    padding-left: 1em;
+    margin: 0 0 0.6em 0;
+    padding-left: 1.5em;
     
 }
 
@@ -130,13 +92,8 @@
     
 }
 
-.article-content ol li::marker {
-    color: #3498db; 
-    font-weight: 600;
-}
-
 .article-content li {
-    margin: 0.5em 0;
+    margin: 0.3em 0;
     
 }
 
@@ -150,16 +107,13 @@
 }
 
 /* 代码样式 */
-
 .article-content code {
-    background-color: var(--code-bg-color);
+    background-color: var(--blockquote-bg-color);
     color: var(--text-color);
     padding: 0.2em 0.5em;
     border-radius: 3px;
     font-family: 'AlimamaFangYuanTi', "InterVariable", "Noto Sans SC-Local", "Noto Sans SC", system-ui, sans-serif;
     font-size: 0.9em;
-    font-weight: bold;
-    box-shadow: var(--code-shadow-color) 0px 1px 3px 0px, var(--code-border-shadow-color) 0px 0px 0px 1px;
 }
 
 /* 代码块样式 */
@@ -168,7 +122,7 @@
     border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 1em;
-    margin: 0 0 1.2em 0;
+    margin: 0.6em 0;
     overflow-x: auto;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     font-size: 0.9em;
@@ -187,14 +141,12 @@
 
 /* 引用样式 */
 .article-content blockquote {
-    margin: 0 0 1.2em 0;
+    margin: 0.6em 0;
     padding: 0.5em 1em;
     border-left: 4px solid var(--theme-color);
     background-color: var(--blockquote-bg-color);
     color: var(--blockquote-text-color);
     font-size: 15px;
-    margin-top: 20px;
-    border-radius: 6px;
 }
 
 .article-content blockquote p {
@@ -205,7 +157,7 @@
 .article-content table {
     border-collapse: collapse;
     width: 100%;
-    margin: 0 0 1.2em 0;
+    margin: 0.6em 0;
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -246,17 +198,6 @@
     margin: 2em 0;
 }
 
-/* 粗体和斜体 */
-.article-content strong {
-    font-weight: bold;
-    color: var(--title-color);
-}
-
-.article-content em {
-    font-style: italic;
-    font-weight: bold;
-    color: var(--text-color);
-}
 
 /* 文章内容中的图标样式 */
 .article-content svg {
@@ -286,8 +227,7 @@
     top: 0.3em;
 }
 
-/* 禁用 expressive-code pre 的边框 */
-/* 禁用 expressive-code frame 的边框 */
+/* 
 .expressive-code pre {
     border: none !important;
 }
@@ -296,14 +236,13 @@
 
 }
 
-/* 自定义 expressive-code 行内代码样式 */
 .expressive-code .ec-line .code {
     border: none !important;
     background: none !important;
     box-shadow: none !important;
     
     padding: 0 !important;
-}
+} */
 
 /* 响应式设计 */
 @media (max-width: 768px) {
@@ -331,4 +270,4 @@
     .article-content blockquote {
         padding: 0.4em 0.8em;
     }
-}
+}/* Markdown 内容样式 */
