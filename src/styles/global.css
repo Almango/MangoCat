@@ -2,7 +2,8 @@
 /* @import 'simple-tips/index.css'; */
 /* 定义亮色主题的CSS变量 */
 :root {
-    --theme-color: rgb(57, 173, 144);
+    --theme-color: #4c92d3;
+    
     --bg-color: #f8f9fa;
     --title-color: #202020;
     --desc-color: #252525;
@@ -17,7 +18,7 @@
     --shadow-color: rgba(0, 0, 0, 0.05);
     --info-bg-color: #f3f3f3;
     --info-font-color: #666666;
-    --blockquote-bg-color: #eeeeee;
+    --blockquote-bg-color: color-mix(in srgb, var(--theme-color) 20%, white);
     --blockquote-text-color: #333333;
     --blockquote-border-color: #c3cfd3;
     --box-synchronism-padding: 0 20px;
@@ -42,7 +43,7 @@
     --shadow-color: rgba(44, 44, 44, 0.3);
     --info-bg-color: #292933;
     --info-font-color: #777;
-    --blockquote-bg-color: #292933;
+    --blockquote-bg-color: color-mix(in srgb, var(--theme-color) 20%, rgb(20, 20, 20 ));
     --blockquote-text-color: #cccccc;
     --blockquote-border-color: #555555;
 }
