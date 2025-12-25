@@ -227,6 +227,9 @@
     top: 0.3em;
 }
 
+strong {
+    color: var(--theme-color);
+}
 /* 
 .expressive-code pre {
     border: none !important;
