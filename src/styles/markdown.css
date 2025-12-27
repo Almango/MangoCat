@@ -158,7 +158,6 @@
     border-collapse: collapse;
     width: 100%;
     margin: 0.6em 0;
-    background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
@@ -208,7 +207,6 @@
     justify-content: center;
     vertical-align: middle;
     flex-shrink: 0;
-    margin-bottom: 1px; /* 微调对齐 */
 }
 
 /* 任务列表 */
@@ -273,4 +271,4 @@ strong {
     .article-content blockquote {
         padding: 0.4em 0.8em;
     }
-}/* Markdown 内容样式 */
+}

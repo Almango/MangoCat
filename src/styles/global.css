@@ -101,7 +101,7 @@ body {
 
 /* PostList 样式 */
 .post-card {
-    background-color: var(--card-bg);
+
     padding: 20px;
     margin-bottom: 15px;
     border-radius: 8px;
@@ -177,8 +177,6 @@ body {
     justify-content: center;
     vertical-align: middle;
     flex-shrink: 0;
-    margin-bottom: 1px;
-    /* 微调对齐 */
 }
 
 
@@ -254,8 +252,7 @@ body {
     justify-content: center;
     vertical-align: middle;
     flex-shrink: 0;
-    margin-bottom: 1px;
-    color: var(--info-font-color);
+    color: inherit;
 }
 
 /* 悬停效果 */
@@ -282,7 +279,6 @@ body {
     justify-content: center;
     align-items: center;
     padding: 8px 16px;
-    background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     color: var(--text-color);
@@ -302,7 +298,6 @@ body {
     align-items: center;
     width: 40px;
     height: 40px;
-    background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     color: var(--text-color);
@@ -454,3 +449,4 @@ body {
     opacity: 0;
     /* 初始状态为透明 */
 }
+
