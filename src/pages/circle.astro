@@ -1,0 +1,333 @@
+---
+import { SiteConfig } from '../config.ts';
+import Layout from '../layouts/Layout.astro';
+import { links } from '../data/links';
+
+// 原生方式解析RSS的函数 - 优化版
+async function fetchRSSFeed(url: string) {
+  try {
+    // 减少超时时间到3秒
+    const response = await Promise.race([
+      fetch(url, { 
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        signal: AbortSignal.timeout(1000) // 使用更现代的AbortSignal.timeout
+      }),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Request timeout')), 1000))
+    ]) as Response;
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const xmlText = await response.text();
+    
+    // 优化解析逻辑，支持RSS和Atom两种格式
+    const items: any[] = [];
+    let match;
+    
+    // 1. 尝试匹配RSS格式的item标签
+    const rssItemRegex = /<item>([\s\S]*?)<\/item>/gi;
+    while ((match = rssItemRegex.exec(xmlText)) !== null) {
+      const item = match[1];
+      
+      // 提取标题
+      const titleMatch = item.match(/<title>(.*?)<\/title>/i);
+      const title = titleMatch ? titleMatch[1].trim() : '';
+      
+      // 提取链接
+      const linkMatch = item.match(/<link>(.*?)<\/link>/i);
+      const link = linkMatch ? linkMatch[1].trim() : '';
+      
+      // 提取发布时间
+      const pubDateMatch = item.match(/<pubDate>(.*?)<\/pubDate>/i);
+      const pubDate = pubDateMatch ? new Date(pubDateMatch[1].trim()) : new Date(0);
+      
+      if (title && link && !isNaN(pubDate.getTime())) {
+        items.push({ title, link, pubDate });
+      }
+    }
+    
+    // 2. 尝试匹配Atom格式的entry标签
+    const atomEntryRegex = /<entry>([\s\S]*?)<\/entry>/gi;
+    while ((match = atomEntryRegex.exec(xmlText)) !== null) {
+      const entry = match[1];
+      
+      // 提取标题
+      const titleMatch = entry.match(/<title(?:[^>]*?)>(.*?)<\/title>/i);
+      const title = titleMatch ? titleMatch[1].trim() : '';
+      
+      // 提取链接（Atom的link格式不同，使用href属性）
+      const linkMatch = entry.match(/<link[^>]*?href=["'](.*?)["'][^>]*?>/i);
+      const link = linkMatch ? linkMatch[1].trim() : '';
+      
+      // 提取发布时间（Atom使用updated标签）
+      const updatedMatch = entry.match(/<updated>(.*?)<\/updated>/i);
+      const pubDate = updatedMatch ? new Date(updatedMatch[1].trim()) : new Date(0);
+      
+      if (title && link && !isNaN(pubDate.getTime())) {
+        items.push({ title, link, pubDate });
+      }
+    }
+    
+    return { items };
+  } catch (error) {
+    // 简化错误日志
+    console.error(`RSS fetch failed: ${url}`);
+    return null;
+  }
+}
+
+// 限制并发请求函数
+async function fetchWithConcurrencyLimit(urls: string[], limit: number, fetchFn: (url: string) => Promise<any>) {
+  const results: any[] = [];
+  const executing: Promise<any>[] = [];
+  
+  for (const url of urls) {
+    const p = Promise.resolve().then(() => fetchFn(url));
+    results.push(p);
+    
+    if (urls.length >= limit) {
+      const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+      executing.push(e);
+      
+      if (executing.length >= limit) {
+        await Promise.race(executing);
+      }
+    }
+  }
+  
+  return Promise.all(results);
+}
+
+// 并行获取所有RSS文章 - 优化版
+async function getAllRSSArticles() {
+  // 过滤出有RSS的友链
+  const rssLinks = links.filter(link => link.rss);
+  
+  // 使用并发限制（最多5个并发请求）
+  const rssPromises = await fetchWithConcurrencyLimit(
+    rssLinks.map(link => link.rss!),
+    5, // 限制并发数
+    async (url) => {
+      const link = rssLinks.find(l => l.rss === url)!;
+      try {
+        const feed = await fetchRSSFeed(url);
+        if (feed && feed.items) {
+          return feed.items.map((item: any) => ({
+            title: item.title,
+            link: item.link,
+            pubDate: item.pubDate,
+            author: link.name,
+            avatar: link.avatar,
+            blogUrl: link.url
+          }));
+        }
+        return [];
+      } catch (error) {
+        return [];
+      }
+    }
+  );
+  
+  const articles: any[] = [];
+  // 合并结果
+  rssPromises.forEach(result => {
+    if (Array.isArray(result) && result.length > 0) {
+      articles.push(...result);
+    }
+  });
+  
+  // 按发布时间降序排序
+  return articles.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+}
+
+// 获取所有文章并限制显示15篇
+const allArticles = await getAllRSSArticles();
+const articles = allArticles.slice(0, 15);
+---
+<Layout pagetitle={`鱼塘 - ${SiteConfig.title}`}>
+  <div class="archive-container">
+    <h1 class="text-3xl font-bold">鱼塘（beta）</h1>
+    <p class="archive-subtitle">看看朋友们在干嘛</p>
+    
+    <div class="archive-content">
+      <div class="archive-post-list">
+        {articles.length > 0 ? (
+          articles.map((article, index) => {
+            const postDate = article.pubDate;
+            const monthDay = postDate.toISOString().substring(5, 10); // 提取月日部分 (MM-DD)
+            return (
+              <div class="archive-post-item animate-slide-in" key={index} style={{ animationDelay: `${index * 0.05}s` }}>
+                <a href={article.link} target="_blank" rel="noopener noreferrer" class="archive-post-link">
+                  <img src={article.avatar} alt={article.author} class="author-avatar" />
+                  <span class="archive-post-date">
+                    {monthDay}
+                  </span>
+                  <span class="archive-post-title">{article.title}</span>
+                  <span class="archive-post-author">{article.author}</span>
+                </a>
+              </div>
+            );
+          })
+        ) : (
+          <div class="empty-state">
+            <p>暂无文章</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .archive-container {
+    max-width: var(--width);
+    margin: 0 auto;
+  }
+  
+  .archive-subtitle {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 40px;
+  }
+  
+  .archive-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .archive-year {
+    border-radius: 8px;
+  }
+  
+  .archive-year-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .archive-post-count {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: var(--info-bg-color);
+    padding: 4px 12px;
+    border-radius: 8px;
+  }
+  
+  .archive-post-list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .archive-post-item {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .archive-post-item:hover {
+    border-color: var(--theme-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+  
+  .archive-post-link {
+    text-decoration: none;
+    color: var(--title-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+  }
+  
+  .author-avatar {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .archive-post-date {
+    font-size: 15px;
+    color: var(--info-font-color);
+    font-weight: 500;
+    min-width: 60px;
+  }
+  
+  .archive-post-title {
+    font-size: 15px;
+    font-weight: 500;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  
+  .archive-post-author {
+    font-size: 13px;
+    color: var(--text-color);
+    margin-left: 10px;
+    background-color: var(--info-bg-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 50px 0;
+    color: var(--text-color);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .archive-title {
+      font-size: 1.8rem;
+    }
+    
+    .archive-post-date {
+      min-width: 20px;
+    }
+    
+    .archive-post-item {
+      padding: 0;
+    }
+    
+    .archive-year-title {
+      font-size: 1.3rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .archive-post-link, .archive-post-link span {
+      gap: 10px;
+      font-size: 14px;
+    }
+    
+    .author-avatar {
+      width: 24px;
+      height: 24px;
+    }
+    
+    /* 在移动端隐藏作者名称 */
+    .archive-post-author {
+      display: none;
+    }
+  }
+</style>

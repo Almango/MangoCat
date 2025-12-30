@@ -20,6 +20,7 @@ export const SiteConfig: SiteConfigType = {
   NavConfig: [
     { name: '归档', path: '/archive' },
     { name: '友链', path: '/link' },
+    { name: '鱼塘', path: '/circle' },
     { name: '项目', path: '/project' },
     { name: '关于', path: '/about' },
   ],
@@ -42,5 +43,5 @@ export const CommentConfig = {
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.9.7a',
+  THEME_VERSION: '0.9.8',
 }
