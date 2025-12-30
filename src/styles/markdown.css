@@ -2,7 +2,7 @@
 .article-content {
     line-height: 1.8;
     color: var(--text-color);
-    font-size: 16px;
+    font-size: 16.5px;
     margin: 20px 0;
 }
 
@@ -64,8 +64,8 @@
 
 /* 链接样式 */
 .article-content a {
-    color: var(--theme-color);
-    text-decoration: none;
+    color: rgb(37, 88, 255);
+    text-decoration: underline;
     transition: color 0.2s ease;
 }
 
@@ -226,7 +226,7 @@
 }
 
 strong {
-    color: var(--theme-color);
+    color: var(--strong-color);
 }
 /* 
 .expressive-code pre {

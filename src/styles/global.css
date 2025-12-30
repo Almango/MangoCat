@@ -5,9 +5,9 @@
     --theme-color: #4c92d3;
     
     --bg-color: #f8f9fa;
-    --title-color: #202020;
+    --title-color: #161616;
     --desc-color: #252525;
-    --text-color: #222222;
+    --text-color: #181818;
     --card-bg: #fff;
     --header-footer-bg-color: #fafbfc;
     --footer-color: #6b7280;
@@ -23,6 +23,7 @@
     --blockquote-border-color: #c3cfd3;
     --box-synchronism-padding: 0 20px;
     --width: 750px;
+    --strong-color: black
 }
 
 
@@ -32,7 +33,7 @@
     --bg-color: hsl(223, 14%, 10%);
     --title-color: #d9d9d9;
     --desc-color: #999999;
-    --text-color: #c9c9c9;
+    --text-color: #d3d3d3;
     --card-bg: hsl(225, 13%, 12%);
     --header-footer-bg-color: var(--bg-color);
     --footer-color: #a1a1aa;
@@ -46,6 +47,7 @@
     --blockquote-bg-color: color-mix(in srgb, var(--theme-color) 20%, rgb(20, 20, 20 ));
     --blockquote-text-color: #cccccc;
     --blockquote-border-color: #555555;
+    --strong-color: #ffffff;
 }
 
 /* 字体定义 */
