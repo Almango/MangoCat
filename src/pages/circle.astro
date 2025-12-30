@@ -10,9 +10,9 @@ async function fetchRSSFeed(url: string) {
     const response = await Promise.race([
       fetch(url, { 
         headers: { 'User-Agent': 'Mozilla/5.0' },
-        signal: AbortSignal.timeout(1000) // 使用更现代的AbortSignal.timeout
+        signal: AbortSignal.timeout(2500) // 使用更现代的AbortSignal.timeout
       }),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('Request timeout')), 1000))
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Request timeout')), 2500))
     ]) as Response;
     
     if (!response.ok) {
@@ -143,7 +143,7 @@ async function getAllRSSArticles() {
 
 // 获取所有文章并限制显示15篇
 const allArticles = await getAllRSSArticles();
-const articles = allArticles.slice(0, 15);
+const articles = allArticles.slice(0, 20);
 ---
 <Layout pagetitle={`鱼塘 - ${SiteConfig.title}`}>
   <div class="archive-container">
