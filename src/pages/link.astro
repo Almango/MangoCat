@@ -16,7 +16,7 @@ import { links } from '../data/links.ts';
     
     <div class="links-grid">
       {links.map((link, index) => (
-        <div class="link-card animate-slide-in" style={{ animationDelay: `${index * 0.1}s` }} data-key={link.name}>
+        <div class="link-card animate-slide-in" style={{ animationDelay: `${index * 0.03}s` }} data-key={link.name}>
           <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-card-inner">
             <div class="link-avatar-container">
               <img src={link.avatar} alt={link.name} class="link-avatar" />
@@ -47,7 +47,7 @@ import { links } from '../data/links.ts';
   .links-subtitle {
     font-size: 1rem;
     color: var(--text-color);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
   
   .links-grid {
@@ -74,10 +74,10 @@ import { links } from '../data/links.ts';
   .link-card-inner {
     display: flex;
     align-items: center;
-    padding: 12px;
+    padding: 10px;
     text-decoration: none;
     color: var(--text-color);
-    gap: 12px;
+    gap: 10px;
   }
   
   .link-avatar-container {
@@ -85,8 +85,8 @@ import { links } from '../data/links.ts';
   }
   
   .link-avatar {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
     object-fit: cover;
     border: 1px solid var(--border-color);
@@ -101,11 +101,11 @@ import { links } from '../data/links.ts';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
   }
   
   .link-name {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--title-color);
     margin: 0;
@@ -115,28 +115,29 @@ import { links } from '../data/links.ts';
   }
   
   .link-icon {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     color: var(--text-color);
     opacity: 0.6;
   }
   
   .link-description {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-color);
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    
   }
   
   /* 响应式设计 */
   @media (max-width: 768px) {
     .links-grid {
       grid-template-columns: 1fr;
-      gap: 15px;
+      gap: 10px;
     }
     
     .link-card-inner {
@@ -145,16 +146,16 @@ import { links } from '../data/links.ts';
     }
     
     .link-avatar {
-      width: 56px;
-      height: 56px;
+      width: 50px;
+      height: 50px;
     }
     
     .link-name {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
     
     .link-description {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
   }
 </style>

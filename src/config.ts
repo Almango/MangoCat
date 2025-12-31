@@ -8,7 +8,7 @@ export const SiteConfig: SiteConfigType = {
   desc: '天真永不消逝，浪漫至死不渝',
   siteUrl: 'https://blog.almango.cn',
   PaginationConfig: {
-    POSTS_PER_PAGE: 6,    // 每页显示的文章数量
+    POSTS_PER_PAGE: 8,    // 每页显示的文章数量
     },
   Categories: {
     '年度总结': { icon: 'material-symbols:edit-document-rounded', color: '#00a3e4ff' },
@@ -43,5 +43,5 @@ export const CommentConfig = {
 }
 
 export const DEVELOPER_CONFIG = {
-  THEME_VERSION: '0.9.8',
+  THEME_VERSION: '0.9.8a',
 }
