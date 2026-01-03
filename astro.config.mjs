@@ -8,9 +8,6 @@ import tailwindcss from '@tailwindcss/vite';
 import { SiteConfig } from './src/config.ts';
 
 export default defineConfig({
-   build: {
-    format: "file",
-  },
     site: SiteConfig.siteUrl,
     markdown: {
     remarkPlugins: [remarkBreaks,],
