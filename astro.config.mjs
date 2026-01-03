@@ -11,7 +11,6 @@ export default defineConfig({
    build: {
     format: "file",
   },
-  integrations: [pagefind()],
     site: SiteConfig.siteUrl,
     markdown: {
     remarkPlugins: [remarkBreaks,],
@@ -26,6 +25,10 @@ export default defineConfig({
       plugins: [pluginLineNumbers(),],
     }),
     icon(), // astro-icon 集成配置正确
+    pagefind({
+      includedSelectors: ['article h1', 'article h2', 'article h3', 'article h4', 'article h5', 'article h6', 'article p', 'article ul', 'article ol', 'article blockquote'],
+      excludedSelectors: ['nav', 'aside', 'footer', '.header', '.sidebar', '.comments']
+    }),
   ],
 
   vite: {

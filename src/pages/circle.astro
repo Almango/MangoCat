@@ -143,7 +143,7 @@ async function getAllRSSArticles() {
 
 // 获取所有文章并限制显示15篇
 const allArticles = await getAllRSSArticles();
-const articles = allArticles.slice(0, 20);
+const articles = allArticles.slice(0, 15);
 ---
 <Layout pagetitle={`鱼塘 - ${SiteConfig.title}`}>
   <div class="archive-container">

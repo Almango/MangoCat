@@ -1,0 +1,228 @@
+---
+import { Icon } from "astro-icon/components";
+import Search from "astro-pagefind/components/Search";
+---
+
+<!-- 搜索图标按钮 -->
+<button class="search-toggle" aria-label="打开搜索" id="search-toggle">
+    <Icon name="material-symbols:search" />
+</button>
+
+<!-- 搜索弹窗 -->
+<div id="search-modal" class="search-modal">
+    <div class="search-modal-content">
+        <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+    </div>
+</div>
+
+<script>
+    // 搜索弹窗逻辑
+    const searchToggle = document.getElementById('search-toggle');
+    const searchModal = document.getElementById('search-modal');
+    
+    // 打开搜索弹窗
+    searchToggle?.addEventListener('click', () => {
+        searchModal?.classList.add('search-modal-open');
+        document.body.style.overflow = 'hidden'; // 防止背景滚动
+        
+        // 延迟一下确保弹窗完全显示后再聚焦
+        setTimeout(() => {
+            const searchInput = document.querySelector('.pagefind-ui__search-input');
+            searchInput?.focus();
+        }, 100);
+    });
+    
+    // 点击弹窗外部关闭
+    searchModal?.addEventListener('click', (e) => {
+        if (e.target === searchModal) {
+            searchModal?.classList.remove('search-modal-open');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // 按ESC键关闭
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchModal?.classList.contains('search-modal-open')) {
+            searchModal?.classList.remove('search-modal-open');
+            document.body.style.overflow = '';
+        }
+    });
+</script>
+
+<style>
+    /* 搜索按钮样式 */
+    .search-toggle {
+        border: 1px solid var(--border-color);
+        background-color: transparent;
+        border-radius: 8px;
+        padding: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        color: var(--text-color);
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+    
+    .search-toggle:hover {
+        background-color: var(--hover-color);
+        border-color: var(--theme-color);
+
+    }
+    
+    .search-toggle:active {
+        transform: translateY(0);
+    }
+    
+    /* 搜索弹窗样式 */
+    .search-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        backdrop-filter: blur(4px);
+    }
+    
+    .search-modal.search-modal-open {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .search-modal-content {
+        background-color: var(--bg-color);
+        border-radius: 8px;
+        padding: 20px;
+        width: 90%;
+        max-width: 650px;
+        max-height: 85vh;
+        overflow-y: auto;
+        position: relative;
+        transform: scale(0.95) translateY(-10px);
+        opacity: 0;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+        /* 确保滚动条出现时圆角保持一致 */
+        scrollbar-gutter: stable;
+    }
+    
+    .search-modal.search-modal-open .search-modal-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+    
+    
+    
+    /* 适配Pagefind UI样式 */
+    .search-modal .pagefind-ui {
+        --pagefind-ui-primary: var(--theme-color);
+        --pagefind-ui-text: var(--text-color);
+        --pagefind-ui-background: var(--bg-color);
+        --pagefind-ui-border: var(--border-color);
+        --pagefind-ui-border-radius: 8px;
+        --pagefind-ui-image-border-radius: 8px;
+        --pagefind-ui-image-box-ratio: 16 / 9;
+        --pagefind-ui-font: inherit;
+        font-size: 14px;
+    }
+    
+    .search-modal .pagefind-ui__search-input {
+        padding: 12px 16px;
+        font-size: 16px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        width: 100%;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+    }
+    
+    .search-modal .pagefind-ui__search-input:focus {
+        outline: none;
+        border-color: var(--theme-color);
+        box-shadow: 0 0 0 3px rgba(var(--theme-color-rgb), 0.15);
+    }
+    
+
+    .search-modal .pagefind-ui__result {
+        padding: 8px 0 !important;
+        border-bottom: 1px solid var(--border-color);
+        transition: background-color 0.15s ease;
+    }
+    
+    .search-modal .pagefind-ui__result:hover {
+        background-color: var(--hover-color);
+    }
+    
+    .search-modal .pagefind-ui__result:last-child {
+        border-bottom: none;
+    }
+    
+    .search-modal .pagefind-ui__result-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 4px;
+        transition: color 0.2s ease;
+    }
+    
+    .search-modal .pagefind-ui__result-title:hover {
+        color: var(--theme-color);
+    }
+    
+    .search-modal .pagefind-ui__result-excerpt {
+        font-size: 14px;
+        color: var(--text-secondary-color);
+        line-height: 1.5;
+    }
+    
+    .search-modal .pagefind-ui__result-link {
+        text-decoration: none;
+        display: block;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* 确保li标签间距紧凑 */
+    .search-modal ul.pagefind-ui__results-list {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .search-modal ul.pagefind-ui__results-list li {
+        margin: 0;
+    }
+    
+    .search-modal .pagefind-ui__no-results {
+        color: var(--text-secondary-color);
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .search-modal .pagefind-ui__search-clear {
+        background: none;
+        border: none;
+        color: var(--text-secondary-color);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+    
+    .search-modal .pagefind-ui__search-clear:hover {
+        color: var(--text-color);
+        background-color: var(--hover-color);
+    }
+</style>

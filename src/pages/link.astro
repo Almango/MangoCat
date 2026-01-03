@@ -16,7 +16,7 @@ import { links } from '../data/links.ts';
     
     <div class="links-grid">
       {links.map((link, index) => (
-        <div class="link-card animate-slide-in" style={{ animationDelay: `${index * 0.03}s` }} data-key={link.name}>
+        <div class="link-card animate-slide-in" style={{ animationDelay: `${index * 0.05}s` }} data-key={link.name}>
           <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-card-inner">
             <div class="link-avatar-container">
               <img src={link.avatar} alt={link.name} class="link-avatar" />
@@ -52,7 +52,7 @@ import { links } from '../data/links.ts';
   
   .links-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 10px;
     margin-bottom: 40px;
   }
