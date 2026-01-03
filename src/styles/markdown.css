@@ -108,7 +108,7 @@
 
 /* 代码样式 */
 .article-content code {
-    background-color: var(--blockquote-bg-color);
+    background-color: var(--info-bg-color);
     color: var(--text-color);
     padding: 0.2em 0.5em;
     border-radius: 3px;
@@ -144,9 +144,8 @@
     margin: 0.6em 0;
     padding: 0.5em 1em;
     border-left: 4px solid var(--theme-color);
-    background-color: var(--blockquote-bg-color);
-    color: var(--blockquote-text-color);
     font-size: 15px;
+    font-style: italic;
 }
 
 .article-content blockquote p {

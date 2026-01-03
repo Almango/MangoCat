@@ -4,6 +4,7 @@ import { ThemeScript } from "astro-theme-toggle/components";
 import { Toggle } from "astro-theme-toggle/components";
 import { SiteConfig } from "../config.ts";
 const { NavConfig } = SiteConfig;
+import Search from "astro-pagefind/components/Search";
 ---
 
 <header class="header">
@@ -23,6 +24,7 @@ const { NavConfig } = SiteConfig;
         <!-- 右侧按钮组：主题切换和导航折叠 -->
         <div class="header-buttons">
             <ThemeScript />
+            <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
             <Toggle class="theme-toggle" style={{ width: "32px", height: "32px" }} />
             
             <!-- 移动端导航折叠按钮 -->

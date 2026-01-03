@@ -3,10 +3,15 @@ import expressiveCode from 'astro-expressive-code';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import remarkBreaks from 'remark-breaks';
 import icon from 'astro-icon';
+import pagefind from "astro-pagefind";
 import tailwindcss from '@tailwindcss/vite';
 import { SiteConfig } from './src/config.ts';
 
 export default defineConfig({
+   build: {
+    format: "file",
+  },
+  integrations: [pagefind()],
     site: SiteConfig.siteUrl,
     markdown: {
     remarkPlugins: [remarkBreaks,],

@@ -3,7 +3,6 @@
 /* 定义亮色主题的CSS变量 */
 :root {
     --theme-color: #4c92d3;
-    
     --bg-color: #f8f9fa;
     --title-color: #161616;
     --desc-color: #252525;
@@ -18,9 +17,6 @@
     --shadow-color: rgba(0, 0, 0, 0.05);
     --info-bg-color: #f3f3f3;
     --info-font-color: #666666;
-    --blockquote-bg-color: color-mix(in srgb, var(--theme-color) 20%, white);
-    --blockquote-text-color: #333333;
-    --blockquote-border-color: #c3cfd3;
     --box-synchronism-padding: 0 20px;
     --width: 750px;
     --strong-color: black
@@ -44,9 +40,6 @@
     --shadow-color: rgba(44, 44, 44, 0.3);
     --info-bg-color: #292933;
     --info-font-color: #777;
-    --blockquote-bg-color: color-mix(in srgb, var(--theme-color) 20%, rgb(20, 20, 20 ));
-    --blockquote-text-color: #cccccc;
-    --blockquote-border-color: #555555;
     --strong-color: #ffffff;
 }
 
@@ -72,12 +65,14 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Satoshi', "InterVariable", "Noto Sans SC-Local", "Noto Sans SC", system-ui, sans-serif;
-    background-color: var(--bg-color);
+    /* background-color: var(--bg-color); */
     color: var(--text-color);
     line-height: 1.6;
     letter-spacing: 1px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+background-image: repeating-linear-gradient(90deg, hsla(196,0%,79%,0.06) 0px, hsla(196,0%,79%,0.06) 1px,transparent 1px, transparent 96px),repeating-linear-gradient(0deg, hsla(196,0%,79%,0.06) 0px, hsla(196,0%,79%,0.06) 1px,transparent 1px, transparent 96px),repeating-linear-gradient(0deg, hsla(196,0%,79%,0.09) 0px, hsla(196,0%,79%,0.09) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(90deg, hsla(196,0%,79%,0.09) 0px, hsla(196,0%,79%,0.09) 1px,transparent 1px, transparent 12px),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+
 }
 
 
